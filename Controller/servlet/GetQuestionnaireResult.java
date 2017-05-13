@@ -19,14 +19,14 @@ import dao.*;
 @WebServlet("/GetQuestionnaireResult")
 public class GetQuestionnaireResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetQuestionnaireResult() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GetQuestionnaireResult() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,36 +40,36 @@ public class GetQuestionnaireResult extends HttpServlet {
 		String qn_id = idList.get(pos);
 		ArrayList<ExDbquestionnaire> newExQnList = new ArrayList<ExDbquestionnaire>();
 		System.out.println(qn_id + "  " + pos);
-		
+
 		int message = DAOFactory.getGetResultDAO().getQnResultByQnId(qn_id, newExQnList);
 		ArrayList<ExDbquestion> qList = newExQnList.get(0).get_transExQuestionList();
-		
+
 		String title = newExQnList.get(0).getQuestionnaire().get_transQn_title();
 		String des =  newExQnList.get(0).get_transQuestionnaire().getQn_des();
-		String order = "{'order': [ ";/////¼ÓÁË¸ö¿Õ¸ñ
-		String single = "{'single':[ ";/////¼ÓÁË¸ö¿Õ¸ñ
-		String multiple = "{'multiple':[ ";/////¼ÓÁË¸ö¿Õ¸ñ
-		String qanda = "{'qanda':[ ";/////¼ÓÁË¸ö¿Õ¸ñ
-		
+		String order = "{'order': [ ";/////åŠ äº†ä¸ªç©ºæ ¼
+		String single = "{'single':[ ";/////åŠ äº†ä¸ªç©ºæ ¼
+		String multiple = "{'multiple':[ ";/////åŠ äº†ä¸ªç©ºæ ¼
+		String qanda = "{'qanda':[ ";/////åŠ äº†ä¸ªç©ºæ ¼
+
 		JSONArray jan = new JSONArray();
 		int length = qList.size();
 		System.out.println(length);
 		for(int i = 0; i < length; ++ i){
 			Dbquestion thisq = qList.get(i).getQuestion();
 			ArrayList<ExDbitem> itemList = qList.get(i).getExItemList();
-			
+
 			String type = thisq.getQ_type();
 			String stem  =thisq.get_transQ_stem();
-			
+
 			if(type.equals("sin")){
-				//µÃµ½´ð°¸
+				//å¾—åˆ°ç­”æ¡ˆ
 				JSONArray options = new JSONArray();
 				ArrayList<ExDbitem> optionList = qList.get(i).get_transExItemList();
 				for(int k = 0; k < optionList.size(); ++ k){
 					options.add(optionList.get(k).get_transI_a_count());
 				}
 				jan.add(options);
-				//×é×°ÎÊÌâ
+				//ç»„è£…é—®é¢˜
 				if(i != length - 1 ) order += "'single',";
 				else order += "'single'";
 				if(itemList.size() > 0) single += "['" + stem + "',";
@@ -81,14 +81,14 @@ public class GetQuestionnaireResult extends HttpServlet {
 				single += ",";/////
 			}
 			else if( type.equals("mul")){
-				//µÃµ½´ð°¸
+				//å¾—åˆ°ç­”æ¡ˆ
 				JSONArray options = new JSONArray();
 				ArrayList<ExDbitem> optionList = qList.get(i).get_transExItemList();
 				for(int k = 0; k < optionList.size(); ++ k){
 					options.add(optionList.get(k).get_transI_a_count());
 				}
 				jan.add(options);
-				//×é×°ÎÊÌâ
+				//ç»„è£…é—®é¢˜
 				if(i != length - 1) order += "'multiple',";
 				else order += "'multiple'";
 				if(itemList.size() > 0) multiple += "['" + stem + "',";
@@ -100,7 +100,7 @@ public class GetQuestionnaireResult extends HttpServlet {
 				multiple += ",";/////
 			}
 			else if(type.equals("que")){
-				//µÃµ½´ð°¸
+				//å¾—åˆ°ç­”æ¡ˆ
 				JSONArray options = new JSONArray();
 				ExDbitem optionList = qList.get(i).get_transExItemList().get(0);
 				ArrayList<ExDbanswer> exanList = optionList.get_transExAnswerList();
@@ -108,13 +108,13 @@ public class GetQuestionnaireResult extends HttpServlet {
 					options.add(exanList.get(k).get_transAnswer().get_transA_content());
 				}
 				jan.add(options);
-				//×é×°ÎÊÌâ
+				//ç»„è£…é—®é¢˜
 				if(i != length - 1) order += "'qanda',";
 				else order += "'qanda'";
 				qanda += "['" + stem +"']";
 				qanda += ",";/////
 			}
-		
+
 		}
 		single = single.substring(0, single.length() - 1);/////
 		multiple = multiple.substring(0, multiple.length() - 1);/////
@@ -123,14 +123,14 @@ public class GetQuestionnaireResult extends HttpServlet {
 		single += "]}";
 		multiple += "]}";
 		qanda += "]}";
-		
+
 		request.setAttribute("title", title);
 		request.setAttribute("des", des);
 		request.setAttribute("order", order);
 		request.setAttribute("single", single);
 		request.setAttribute("multiple", multiple);
 		request.setAttribute("qanda", qanda);
-		
+
 		String answer = jan.toString();
 		request.setAttribute("answer", answer);
 

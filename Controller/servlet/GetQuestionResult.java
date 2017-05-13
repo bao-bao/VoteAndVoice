@@ -24,14 +24,14 @@ import vo.ExDbquestion;
 @WebServlet("/GetQuestionResult")
 public class GetQuestionResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetQuestionResult() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GetQuestionResult() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,13 +39,13 @@ public class GetQuestionResult extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int pos =  Integer.parseInt(request.getParameter("pos"));
-		
+
 		ArrayList<String> qnidList = (ArrayList<String>)session.getAttribute("questionqnid");
 		ArrayList<Long> qidList = (ArrayList<Long>) session.getAttribute("questionqid");
 		String qn_id = qnidList.get(pos);
 		Long q_id = qidList.get(pos);
 		System.out.println(qn_id + "  " + q_id + "  " + pos);
-		
+
 		ArrayList<ExDbquestion> newExQList = new ArrayList<ExDbquestion>();
 		int message = DAOFactory.getGetResultDAO().getQResultByQnIdQId(qn_id, BigDecimal.valueOf(q_id), newExQList);
 		if (message<0) {
@@ -58,26 +58,26 @@ public class GetQuestionResult extends HttpServlet {
 		String single = "{'single':[";
 		String multiple = "{'multiple':[";
 		String qanda = "{'qanda':[";
-		
+
 		JSONArray jan = new JSONArray();
 		int length = 1;
 		System.out.println(length);
 		for(int i = 0; i < length; ++ i){
 			Dbquestion thisq = exQ.get_transQuestion();
 			ArrayList<ExDbitem> itemList = exQ.getExItemList();
-			
+
 			String type = thisq.getQ_type();
 			String stem  =thisq.get_transQ_stem();
-			
+
 			if(type.equals("sin")){
-				//得到答案
+				//寰楀埌绛旀
 				JSONArray options = new JSONArray();
 				ArrayList<ExDbitem> optionList = exQ.get_transExItemList();
 				for(int k = 0; k < optionList.size(); ++ k){
 					options.add(optionList.get(k).get_transI_a_count());
 				}
 				jan.add(options);
-				//组装问题
+				//缁勮闂
 				if(i != length - 1 ) order += "'single',";
 				else order += "'single'";
 				if(itemList.size() > 0) single += "['" + stem + "',";
@@ -88,14 +88,14 @@ public class GetQuestionResult extends HttpServlet {
 				}
 			}
 			else if( type.equals("mul")){
-				//得到答案
+				//寰楀埌绛旀
 				JSONArray options = new JSONArray();
 				ArrayList<ExDbitem> optionList = exQ.get_transExItemList();
 				for(int k = 0; k < optionList.size(); ++ k){
 					options.add(optionList.get(k).get_transI_a_count());
 				}
 				jan.add(options);
-				//组装问题
+				//缁勮闂
 				if(i != length - 1) order += "'multiple',";
 				else order += "'multiple'";
 				if(itemList.size() > 0) multiple += "['" + stem + "',";
@@ -106,7 +106,7 @@ public class GetQuestionResult extends HttpServlet {
 				}
 			}
 			else if(type.equals("que")){
-				//得到答案
+				//寰楀埌绛旀
 				JSONArray options = new JSONArray();
 				ExDbitem optionList = exQ.get_transExItemList().get(0);
 				ArrayList<ExDbanswer> exanList = optionList.get_transExAnswerList();
@@ -114,28 +114,28 @@ public class GetQuestionResult extends HttpServlet {
 					options.add(exanList.get(k).get_transAnswer().get_transA_content());
 				}
 				jan.add(options);
-				//组装问题
+				//缁勮闂
 				if(i != length - 1) order += "'qanda',";
 				else order += "'qanda'";
 				qanda += "['" + stem +"']";
 			}
-		
+
 		}
 		order += "]}";
 		single += "]}";
 		multiple += "]}";
 		qanda += "]}";
-		
+
 		request.setAttribute("title", title);
 		request.setAttribute("des", des);
 		request.setAttribute("order", order);
 		request.setAttribute("single", single);
 		request.setAttribute("multiple", multiple);
 		request.setAttribute("qanda", qanda);
-		
+
 		String answer = jan.toString();
 		request.setAttribute("answer", answer);
-		
+
 		System.out.println(title);
 		System.out.println(order);
 		System.out.println(single);
