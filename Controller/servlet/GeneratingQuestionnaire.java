@@ -30,14 +30,14 @@ import vo.ExDbquestionnaire;
 @WebServlet("/Genquestionnaire")
 public class GeneratingQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GeneratingQuestionnaire() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GeneratingQuestionnaire() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,49 +51,49 @@ public class GeneratingQuestionnaire extends HttpServlet {
 		String single = request.getParameter("single");
 		String multiple = request.getParameter("multiple");
 		String qanda = request.getParameter("qanda");
-		
+
 		HttpSession session = request.getSession();
 		ExDbquestionnaire newExQn = (ExDbquestionnaire)session.getAttribute("newExQn");
-		
+
 		if(newExQn == null){
-			request.setAttribute("previewInfo","Ã»ÓĞ¾­¹ıÖ®Ç°µÄ½¨Á¢²½Öè");
+			request.setAttribute("previewInfo","æ²¡æœ‰ç»è¿‡ä¹‹å‰çš„å»ºç«‹æ­¥éª¤");
 			request.getRequestDispatcher("previewQuestionnaire.jsp").forward(request, response);
 			return;
 		}
 		ArrayList<ExDbquestion> exQuestionList = newExQn.get_transExQuestionList();
 		Dbquestionnaire questionnaire = newExQn.getQuestionnaire();
-		//ÉèÖÃÎÊ¾í±êÌâºÍÃèÊö
+		//è®¾ç½®é—®å·æ ‡é¢˜å’Œæè¿°
 		questionnaire.set_transQn_title(title);
 		questionnaire.set_transQn_des(des);
-		
+
 		SimpleDateFormat df =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		questionnaire.setQn_endtime(Timestamp.valueOf(df.format(new Date())));
-		
-		//½âÎöjson×Ö·û´®,µÃµ½¶şÎ¬Êı×é
+
+		//è§£æjsonå­—ç¬¦ä¸²,å¾—åˆ°äºŒç»´æ•°ç»„
 		JSONObject jorder = JSONObject.fromObject(order);
 		JSONArray  orderarr = jorder.getJSONArray("order");
-		
+
 		JSONObject jsingle = JSONObject.fromObject(single);
 		JSONArray singlearr = jsingle.getJSONArray("single");
-		
+
 		JSONObject jmultiple = JSONObject.fromObject(multiple);
 		JSONArray multiplearr = jmultiple.getJSONArray("multiple");
-		
+
 		JSONObject jqanda = JSONObject.fromObject(qanda);
 		JSONArray qandaarr = jqanda.getJSONArray("qanda");
-		
-		//ÉèÖÃÎÊÌâÊıÁ¿
+
+		//è®¾ç½®é—®é¢˜æ•°é‡
 		questionnaire.set_transQn_q_count(orderarr.size());
-		//×é×°ExDbquestionnaire
-		//ÈıÖÖÎÊÌâ¼ÆÊı
+		//ç»„è£…ExDbquestionnaire
+		//ä¸‰ç§é—®é¢˜è®¡æ•°
 		int isingle = 0, imultiple = 0, iqanda = 0;
-		//×é×°ÎÊÌâºÍÑ¡ÏîÁĞ±í
+		//ç»„è£…é—®é¢˜å’Œé€‰é¡¹åˆ—è¡¨
 		for(int i = 0; i < orderarr.size(); ++ i){
-			//×é×°ExDbquestion
+			//ç»„è£…ExDbquestion
 			ExDbquestion exquestion = new ExDbquestion();
 			Dbquestion question = exquestion.get_transQuestion();
 			ArrayList<ExDbitem> exItemList = exquestion.get_transExItemList();
-			
+
 			String type = null;
 			JSONArray arr_question = null;
 			if(orderarr.getString(i).equals("single") == true){
@@ -108,12 +108,12 @@ public class GeneratingQuestionnaire extends HttpServlet {
 				type="que";
 				arr_question = qandaarr.getJSONArray(iqanda ++);
 			}
-			//Èç¹ûÊÇÎÊ´ğÌâ¾ÍÃ»ÓĞÑ¡Ïîµ«ÊÇÓĞÌâ¸É
+			//å¦‚æœæ˜¯é—®ç­”é¢˜å°±æ²¡æœ‰é€‰é¡¹ä½†æ˜¯æœ‰é¢˜å¹²
 			if (arr_question != null) {
 				question.setQ_stem(arr_question.getString(0));
 				question.setQ_i_count(new BigDecimal(arr_question.size() - 1));
 				question.setQ_type(type);
-				// Ìí¼ÓÑ¡Ïî
+				// æ·»åŠ é€‰é¡¹
 				for (int j = 1; j < arr_question.size(); ++j) {
 					ExDbitem exItem = new ExDbitem();
 					Dbitem item = exItem.get_transItem();
@@ -125,46 +125,46 @@ public class GeneratingQuestionnaire extends HttpServlet {
 					ExDbitem exItem = new ExDbitem();
 					Dbitem item = exItem.get_transItem();
 					item.setI_type(type);
-					item.set_transI_des("ÎÊ´ğÌâ");
+					item.set_transI_des("é—®ç­”é¢˜");
 					exItemList.add(exItem);
 				}
 			}
 			else{
-				request.setAttribute("previewInfo", "ÌâÄ¿²»ÄÜÈ«Îª¿Õ");
+				request.setAttribute("previewInfo", "é¢˜ç›®ä¸èƒ½å…¨ä¸ºç©º");
 				request.getRequestDispatcher("prviewQuestionnaire.jsp").forward(request, response);
 				return;
 			}
-			//¼ÓÈëÎÊ¾í
+			//åŠ å…¥é—®å·
 			exQuestionList.add(exquestion);
 		}
 		ArrayList<ExDbquestionnaire> exDbarr = new ArrayList<ExDbquestionnaire>();
 		exDbarr.add(newExQn);
 		int message = DAOFactory.getCreateQnDAO().createQnAll(exDbarr);
 		switch(message){
-		case CreateQnDAO.EXCEPTION: {
-			request.setAttribute("previewInfo", "ºóÌ¨¹ÊÕÏ");
-			System.out.println("ºóÌ¨¹ÊÕÏ");
-			request.getRequestDispatcher("previewQuestionnaire.jsp").forward(request, response);
-			return;
-		}
-		case CreateQnDAO.FAILED:{
-			request.setAttribute("previewInfo", "´´½¨Ê§°Ü,ÎÊ¾í²»·ûºÏ±¾Æ½Ì¨¹æ·¶");
-			System.out.println("´´½¨Ê§°Ü,ÎÊ¾í²»·ûºÏ±¾Æ½Ì¨¹æ·¶");
-			request.getRequestDispatcher("previewQuestionnaire.jsp").forward(request, response);
-			return;
-		}
-		case CreateQnDAO.SUCCESS:{
-			request.setAttribute("questionnaireInfo", "´´½¨³É¹¦");
-			System.out.println( "´´½¨³É¹¦");
-			request.setAttribute("title", title);
-			request.setAttribute("des", des);
-			request.setAttribute("order", order);
-			request.setAttribute("single", single);
-			request.setAttribute("multiple", multiple);
-			request.setAttribute("qanda", qanda);
-			request.getRequestDispatcher("questionnaire.jsp").forward(request, response);
-			return;
-		}
+			case CreateQnDAO.EXCEPTION: {
+				request.setAttribute("previewInfo", "åå°æ•…éšœ");
+				System.out.println("åå°æ•…éšœ");
+				request.getRequestDispatcher("previewQuestionnaire.jsp").forward(request, response);
+				return;
+			}
+			case CreateQnDAO.FAILED:{
+				request.setAttribute("previewInfo", "åˆ›å»ºå¤±è´¥,é—®å·ä¸ç¬¦åˆæœ¬å¹³å°è§„èŒƒ");
+				System.out.println("åˆ›å»ºå¤±è´¥,é—®å·ä¸ç¬¦åˆæœ¬å¹³å°è§„èŒƒ");
+				request.getRequestDispatcher("previewQuestionnaire.jsp").forward(request, response);
+				return;
+			}
+			case CreateQnDAO.SUCCESS:{
+				request.setAttribute("questionnaireInfo", "åˆ›å»ºæˆåŠŸ");
+				System.out.println( "åˆ›å»ºæˆåŠŸ");
+				request.setAttribute("title", title);
+				request.setAttribute("des", des);
+				request.setAttribute("order", order);
+				request.setAttribute("single", single);
+				request.setAttribute("multiple", multiple);
+				request.setAttribute("qanda", qanda);
+				request.getRequestDispatcher("questionnaire.jsp").forward(request, response);
+				return;
+			}
 		}
 	}
 
