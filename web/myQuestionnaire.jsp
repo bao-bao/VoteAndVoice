@@ -30,10 +30,10 @@
                             String state = myQuestionnaireList.get(i).get_transQuestionnaire().get_transQn_state();
                             if(state.equals("进行中")) {
                             %>
-                            
+
                     		<input type="hidden" name="qn_id" value="<%=myQuestionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
                             <button type="submit" class="btn btn-danger btn-lg">结束问卷</button>
-                    		
+
                             <%
                             }
                             %>
