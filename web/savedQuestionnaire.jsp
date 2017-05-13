@@ -24,16 +24,17 @@
                 <h3 clas="panel-title"><%=savedQustionnaireList.get(i).getQuestionnaire().get_transQn_title() %></h3>
             </div>
             <div class="panel-body">
-                <form action="EndQuestionnaire" method="post">
+                <form action="ContinueQuestionnaire" method="post">
                     <%=savedQustionnaireList.get(i).get_transS_name() + ' ' + savedQustionnaireList.get(i).getQuestionnaire().get_transQn_state() %>
                     <%
                         String state = savedQustionnaireList.get(i).get_transQuestionnaire().get_transQn_state();
-                        if(state.equals("进行中")) {
+                        if(state.equals("未完成")) {
                     %>
 
                     <input type="hidden" name="qn_id" value="<%=savedQustionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
-                    <button type="submit" class="btn btn-success btn-lg">继续编辑</button>
-                    <button type="submit" class="btn btn-danger btn-lg">删除</button>
+                    <input type="hidden" name="btntype" id="btntype" value="" />
+                    <button type="submit" class="btn btn-success btn-lg" onclick="document.getElementById('btntype').value=0">继续编辑</button>
+                    <button type="submit" class="btn btn-danger btn-lg" onclick="document.getElementById('btntype').value=1">删除</button>
 
                     <%
                         }

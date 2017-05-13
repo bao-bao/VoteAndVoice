@@ -272,7 +272,8 @@ function prepareSidebarLink(){
     if(links[0].getElementsByTagName("a")[0] == null) return;
     links[0].getElementsByTagName("a")[0].setAttribute("href", "/VoteAndVoice/BasicInfo");
     links[1].getElementsByTagName("a")[0].setAttribute("href",  "MyQuestionnaire");
-    links[2].getElementsByTagName("a")[0].setAttribute("href", "Safe");
+    links[2].getElementsByTagName("a")[0].setAttribute("href", "SavedQuestionnaire");
+    links[3].getElementsByTagName("a")[0].setAttribute("href", "Safe");
 
     //for the toggle
     var liLink = sidebar.getElementsByTagName("li");
@@ -842,6 +843,79 @@ function onClickPreview(){
 	window.open("/VoteAndVoice/previewQuestionnaire.jsp");
 }
 
+function onClickSave(){
+    var title = document.getElementsByClassName("qnaire-main-title")[0];
+    title = title.innerText;
+    if(title == null || title == ""){
+        document.getElementsByClassName("error-tips")[0].innerText = "*请填写标题";
+        return;
+    }
+    else{
+        document.getElementsByClassName("error-tips")[0].innerText = "";
+    }
+    var des = document.getElementsByClassName("qnaire-des")[0];
+    des = des.innerText;
+    //提示错误信息
+    if(des == null || des == ""){
+        document.getElementsByClassName("error-tips")[1].innerText = "*请填写描述";
+        return;
+    }
+    else{
+        document.getElementsByClassName("error-tips")[1].innerText = "";
+    }
+
+    var qnaire = document.getElementsByClassName("qnaire-out");
+    var jorder = "{'order': [";
+    var is_single = false;
+    var jsingle = "{'single': [";
+    var is_multiple = false;
+    var jmultiple = "{'multiple': [";
+    var is_qanda = false;
+    var jqanda = "{'qanda': [";
+
+    for(var i = 2;i < qnaire.length; ++ i){
+        if(qnaire[i].getAttribute("class") == "qnaire-out qnaire-single-question"){
+            if(is_single == false) is_single = true;
+            else jsingle += ",";
+            jorder += "'"+  'single' + "'";
+            var jquestion = generateJQuestion(qnaire[i]);
+            jsingle +=  jquestion;
+        }
+        else if(qnaire[i].getAttribute("class") == "qnaire-out qnaire-multiple-question"){
+            if(is_multiple == false) is_multiple = true;
+            else jmultiple += ",";
+            jorder += "'" +  'multiple' + "'";
+            var jquestion = generateJQuestion(qnaire[i]);
+            jmultiple += jquestion;
+        }
+        else if(qnaire[i].getAttribute("class") == "qnaire-out qnaire-qanda-question"){
+            if(is_qanda == false) is_qanda = true;
+            else jqanda += ",";
+            jorder += "'" + 'qanda' + "'";
+            var jquestion = generateJQuestion(qnaire[i]);
+            jqanda += jquestion;
+        }
+        if(i != qnaire.length - 1) jorder += ',';
+    }
+    jorder += "]}";
+    jsingle += "]}";
+    jmultiple += "]}";
+    jqanda += "]}";
+    //添加到cookie中
+    console.log(jorder)///
+    console.log(jsingle)///
+    console.log(jmultiple)///
+    console.log(jqanda)///
+    addCookie('title', title, 1);
+    addCookie('des', des, 1);
+    addCookie('order', jorder, 1);
+    addCookie('single', jsingle, 1);
+    addCookie('multiple', jmultiple, 1);
+    addCookie('qanda', jqanda, 1);
+
+    window.alert("保存成功");
+    window.location.href="/VoteAndVoice/index.jsp";
+}
 function processQnaire(order, single, multiple, qanda){
 	var jorder = eval('(' + order + ')' );
 	var jsingle = eval( '(' + single + ')' );
