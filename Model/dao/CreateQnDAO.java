@@ -307,8 +307,10 @@ public class CreateQnDAO {
 				+ "order by qn_starttime desc ";
 		String sqlQnDly = "update db_16.questionnaire "
 				+ "set qn_title = ?, "
-				+ "set qn_des = ?, "
-				+ "set qn_starttime = ? "
+				+ "qn_des = ?, "
+				+ "qn_starttime = ?, "
+				+ "qn_state = 'ing', "
+				+ "qn_delay = NULL "
 				+ "where qn_id = ?";
 		String sqlChangeVcoin = "update db_16.user "
 				+ "set v_coin = ? "
