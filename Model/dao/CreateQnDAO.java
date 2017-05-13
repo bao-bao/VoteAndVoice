@@ -28,6 +28,7 @@ public class CreateQnDAO {
 	static public final int SUCCESS = 1;
 	static public final int FAILED = -2;
 	static public final int INSUFFICIENT = -5;
+	static public final int DEFAULT_LIMIT = 100;
 
 	public CreateQnDAO() {
 		try {
@@ -296,7 +297,7 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
-
+	//创建问卷，已合并，要求qn_id为null,"","0"时视为新建，有其他值时视为已建的草稿
 	public int createQnAll(ArrayList<ExDbquestionnaire> exQnList) {
 		int message = FAILED;
 		String sqlQn = "insert into db_16.questionnaire(qn_id, s_id, qn_title, qn_des, qn_type, qn_tag, qn_authority, qn_endtime) "
@@ -484,7 +485,7 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
-
+	//将指定的ExDbquestionnaire生成为JSONObject{title,des.order.single,multiple.qanda}
 	public String getJSONStrForQnDelay(ExDbquestionnaire exQn) {
 		Dbquestionnaire qn = exQn.getQuestionnaire();
 		JSONObject json = new JSONObject();
@@ -521,7 +522,7 @@ public class CreateQnDAO {
 		}
 		return json.toString();
 	}
-
+	//保存草稿
 	public int saveQnDelay(ExDbquestionnaire exQn) {
 		int message = FAILED;
 		String sqlQn = "insert into db_16.questionnaire(qn_id, s_id, qn_title, qn_des, qn_type, qn_tag, qn_authority, qn_endtime, qn_state, qn_delay) "
@@ -543,6 +544,9 @@ public class CreateQnDAO {
 			pstmtQn.setString(9,"dly");
 			pstmtQn.setString(10,qn.getQn_delay());
 			int i = pstmtQn.executeUpdate();
+			if(i > 0) {
+			    message = SUCCESS;
+            }
 			dbconn.close();
 			message = SUCCESS;
 		} catch (Exception e) {
@@ -551,7 +555,7 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
-
+	//取出指定ID的草稿
 	public int loadQnDelayByQnId(String QnId, ArrayList<ExDbquestionnaire> exQnList) {
 		int message = FAILED;
 		String sqlQn = "select * from db_16.questionnaire where qn_id=? ";
@@ -580,7 +584,7 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
-
+	//删除指定ID的草稿
 	public int deleteQnDelayByQnId(String QnId) {
 		int message = FAILED;
 		String sqlQn = "delete from db_16.questionnaire where qn_id=? ";
@@ -605,5 +609,43 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
-
+	//用于列出所有的草稿
+	public int getDelayExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * from "
+				+ "(select * from db_16.questionnaire where s_id=? and qn_state = ?) questionnaire "
+				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
+				+ "order by qn_starttime desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
+		exQuestionnaireList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s_id);
+			pstmt.setString(2, "dly");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
+				exQuestionnaire.setAll(rs);
+				exQuestionnaireList.add(exQuestionnaire);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getDelayExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
+		return getDelayExQuestionnairesByUId(s_id, exQuestionnaireList, DEFAULT_LIMIT);
+	}
 }
