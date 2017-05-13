@@ -231,6 +231,12 @@ function addCookie(name, value, expireHours){
 	}
 	document.cookie = cookieString;
 }
+function addLocalStorage(name, value){
+    localStorage.setItem(name, encodeURI(value));
+}
+function getLocalStorage(name){
+    return decodeURI(localStorage.getItem(name));
+}
 //获取cookie
 function getCookie(name){
 	var strCookie = document.cookie;
@@ -833,12 +839,12 @@ function onClickPreview(){
 	console.log(jsingle)///
 	console.log(jmultiple)///
 	console.log(jqanda)///
-	addCookie('title', title, 1);
-	addCookie('des', des, 1);
-	addCookie('order', jorder, 1);
-	addCookie('single', jsingle, 1);
-	addCookie('multiple', jmultiple, 1);
-	addCookie('qanda', jqanda, 1);
+	addLocalStorage('title', title);
+	addLocalStorage('des', des);
+	addLocalStorage('order', jorder);
+	addLocalStorage('single', jsingle);
+	addLocalStorage('multiple', jmultiple);
+	addLocalStorage('qanda', jqanda);
 	
 	window.open("/VoteAndVoice/previewQuestionnaire.jsp");
 }
@@ -1063,12 +1069,12 @@ function onSubmitQuestionnaire(){
 	var confirm_btn  = document.getElementById("confirm_btn");
 	if(confirm_btn ==  null) return false;
 	confirm_btn.onclick = function(){
-		var title = unescape(getCookie('title'));
-		var des = unescape(getCookie('des'));
-		var order = unescape(getCookie('order'));
-		var single = unescape(getCookie('single'));
-		var multiple = unescape(getCookie('multiple'));
-		var qanda = unescape(getCookie('qanda'));
+		var title = getLocalStorage('title');
+		var des = getLocalStorage('des');
+		var order = getLocalStorage('order');
+		var single = getLocalStorage('single');
+		var multiple = getLocalStorage('multiple');
+		var qanda = getLocalStorage('qanda');
 		
 		$("#title").val(title);
 		$("#des").val(des);

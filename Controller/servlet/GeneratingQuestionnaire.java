@@ -156,6 +156,10 @@ public class GeneratingQuestionnaire extends HttpServlet {
 			case CreateQnDAO.SUCCESS:{
 				request.setAttribute("questionnaireInfo", "创建成功");
 				System.out.println( "创建成功");
+				String qn_id = newExQn.getQuestionnaire().getQn_id();
+				String u_id = newExQn.getQuestionnaire().getS_id();
+				request.setAttribute("u_id", u_id);
+				request.setAttribute("qn_id", qn_id);
 				request.setAttribute("title", title);
 				request.setAttribute("des", des);
 				request.setAttribute("order", order);

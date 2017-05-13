@@ -8,6 +8,7 @@
 	Dbuser muser = (Dbuser)session.getAttribute("loginUser");
 %>
 <link rel="stylesheet"  href="style/user.css" />
+
     <!-- 页面主要内容 -->
     <div  id="main" class="container">
         <div class="row">
