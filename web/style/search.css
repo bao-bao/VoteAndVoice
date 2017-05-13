@@ -1,0 +1,549 @@
+/* searchQuestion.html的样式 */
+.search {
+    margin-top: 3%;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    height: 72px;
+    z-index: 2;
+    position: relative;
+}
+
+.search form {
+    height: 72px;
+}
+
+.search .label_search {
+    position: absolute;
+    top: 1px;
+    left: 118px;
+    width: 498px;
+    height: 50px;
+    line-height: 50px;
+    z-index: 1;
+}
+
+.search .text {
+    width: 600px;
+    height: 48px;
+    border: 1px solid #c8c8c8;
+    background: none;
+    padding: 10px 0 10px 10px;
+    position: absolute;
+    left: 110px;
+    top: 0;
+    z-index: 2;
+    color: #323232;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: 0;
+}
+
+.search .select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #c8c8c8;
+    width: 100px;
+    height: 48px;
+    padding: 0 0 0 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: #fafafa;
+}
+
+.search .select_pop {
+    width: 100px;
+    height: 76px;
+    border: 1px solid #c8c8c8;
+    position: absolute;
+    top: 48px;
+    left: -1px;
+    background: #fff;
+    overflow: auto;
+    display: none;
+    padding: 1px;
+}
+
+.search .select_pop a,.search .select_pop a:hover {
+    display: block;
+    height: 36px;
+    padding: 0 5px 0 15px;
+    font: 16px/32px 'Hiragino Sans GB',"Simsun";
+}
+
+.search .select_pop a {
+    color: #646464;
+}
+
+.search .select_pop a:hover {
+    background-color: rgba(20, 200, 20, 0.3);
+    color: #fff;
+}
+
+.search .select {
+    line-height: 50px;
+    font-size: 18px;
+    color: #969696;
+    cursor: pointer;
+}
+
+.search .sbtn {
+    width: 130px;
+    height: 48px;
+    border: 0;
+    margin-left: 2px;
+    background-color: #40B50E;
+    cursor: pointer;
+    position: absolute;
+    left: 720px;
+    top: 0;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.search .sbtn:hover {
+    background: #48c911
+}
+
+/*-- questionnaire_list --*/
+.events_box {
+    margin: 1em 0 2em;
+}
+.event_left{
+    float: left;
+    width: 24%;
+}
+.event_left-item {
+    padding-right: 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.event_right {
+    overflow: hidden;
+}
+.event_left-item .icon_2 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #999;
+}
+.event_left-item .icon_2 i {
+    font-size: 20px;
+    margin-right: 15px;
+    float: left;
+    vertical-align: middle;
+    color: #999;
+}
+.speaker_item a{
+    color:#f1b458;
+}
+.speaker_item a:hover{
+    color:#000;
+}
+
+.event_right h3{
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom:15px;
+}
+.event_right h3 a{
+	color:#000;
+}
+.event_right p{
+	color: #333;
+    font-size: 0.8em;
+    line-height: 1.5em;
+}
+.event_right p a{
+	font-size:0.8em;
+	color:#000;
+}
+.event_right p a:hover{
+    font-size: 0.8em;
+	text-decoration:underline;
+}
+.event_right img{
+	margin:1em 0 0 0;
+	width:50px;
+}
+
+/* --events --*/
+.event-page{
+    font-size: 20px;
+	margin-bottom:2em;
+}
+.event-speakers {
+    padding: 0;
+    margin:0;
+    list-style: none;
+}
+.event-speakers li {
+    display: inline-block;
+    margin-right:20px;
+}
+.event-page .event-info .event-info-text a {
+    text-decoration: none;
+}
+.event-page p {
+    margin: 0;
+}
+
+.event-desc {
+    margin-bottom: 30px;
+}
+
+.event-desc h2{
+	font-size:1.4em;
+	margin-bottom:10px;
+}
+.event-desc h2 a{
+	color:#000;
+}
+.event-desc h2 a:hover, .event-speakers li a:hover{
+	color:#777;
+}
+.link-font{
+    font-size: 0.8em;
+    color: #111111;
+}
+.event-img{
+	overflow:hidden;
+	position:relative;
+    margin-left: 24%;
+    margin-top: 12%;
+}
+.event-img img{
+	transition: all 0.2s ease-out;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+.event-img .over-image {
+    height: 128px;
+    width: 128px;
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    box-shadow: 0 0 0 0 #f1b458 inset;
+    -webkit-box-shadow: 0 0 0 0 #f1b458 inset;
+    -moz-box-shadow: 0 0 0 0 #f1b458 inset;
+    -o-box-shadow: 0 0 0 0 #f1b458 inset;
+    transition: all 0.2s ease-out;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+.event-img:hover .over-image {
+    opacity: 1;
+    box-shadow: 0 0 0 8px #f1b458 inset;
+    -webkit-box-shadow: 0 0 0 8px #f1b458 inset;
+    -moz-box-shadow: 0 0 0 8px #f1b458 inset;
+    -o-box-shadow: 0 0 0 8px #f1b458 inset;
+    transition: all 0.2s ease-out;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+}
+
+.img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+/**************************for the search dropdown menu*******************/
+div.select-box form{
+    margin-bottom: 30%;
+}
+div.select-block{
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.5);
+    border-radius: 6%;
+}
+div.select-block select{
+    width: 100%;
+    display: inline-block;
+}
+span.select-title{
+    font-weight: bold;
+    display: inline-block;
+    color: #1ABC9C;
+    opacity: 0.9;
+}
+div.select-block select option{
+    font-size: smaller;
+    background-color: transparent!important;
+}
+div.select-block option:nth-child(2n){
+    background-color: rgba(40, 230, 20, 0.1)!important;
+}
+div.select-block option:hover{
+    font-weight: bolder!important;
+}
+div.select-box button:hover{
+    color: #1ABC9C;
+    background-color: white;
+}
+/* 分页 */
+a {
+    text-decoration: none;
+}
+
+#page {
+    height: 50px;
+    display: table;
+    margin-left: 25%;
+}
+
+.page {
+    text-align: center;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.pagingUl {
+    float: right;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 40px;
+}
+
+.pagingUl li {
+    float: left;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    margin-right: 5px;
+    border-radius: 5px
+}
+
+.pagingUl li a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 40px;
+    color: #666;
+    font-size: 12px;
+    border-radius: 5px
+}
+
+.prv,
+.next {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    background: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.prv {
+    margin-right: 10px;
+}
+
+.first,
+.last {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 40px;
+    /*border: 1px solid #ddd;*/
+    cursor: pointer;
+    background: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.prv:hover,
+.next:hover,
+.first:hover,
+.last:hover,
+.pagingUl li a:hover,
+.activP {
+    background-color: #000!important;
+    color: #fff!important;
+}
+
+
+/* 这是user.html的样式 */
+
+img.img-rounded {
+    position: relative;
+    left: 25%;
+}
+div#user-name span{
+    position: relative;
+    left: 25%;
+}
+
+#side hr{
+    margin: 10px;
+    background-color: gainsboro;
+    border: none;
+    height: 1px;
+}
+
+a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dropdown-toggle:active{
+    text-decoration: none;
+    color: black;
+}
+
+#type-list{
+    margin-left: 10%;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+div#type-list div.type-group div.user-button{
+    margin-bottom: 10%;
+}
+div.type-header{
+    margin-left: 10%;
+    display: block;
+    box-sizing: border-box;
+}
+div.type-header h4 a{
+    font-size: larger;
+    color: #333333;
+}
+div.type-group{
+    display: inline-block;
+}
+.dropdown ul{
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+
+.user-button label,.dropdown ul li {
+    display: block;
+    width: 200px;
+    background: #ECF0F1;
+    opacity: 0.7;
+    padding: 15px 20px;
+}
+div.type1 label:hover, div.type1 label, div.type1 input{
+    color: #03a9f4;
+    border-left: 4px solid #03a9f4;
+}
+div.type2 label:hover, div.type2 label, div.type2 input{
+    color: #ffc107;
+    border-left: 4px solid #ffc107;
+}
+div.type3 label:hover, div.type3 label, div.type3 input{
+    color: #ff8888;
+    border-left: 4px solid #ff8888;
+}
+div.type1 label:hover
+{
+    background: #03a9f4;
+    color:white;
+}
+div.type2 label:hover
+{
+    background:#ffc107;
+    color:white;
+}
+div.type3 label:hover
+{
+    background: #ff8888;
+    color:white;
+}
+
+.user-button label {
+    border-radius: 0 5px 0 0;
+    position: relative;
+    z-index: 2;
+}
+.user-button input{
+    display: none;
+}
+
+.animate {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Chrome and Safari */
+    -moz-backface-visibility: hidden;
+    /* Firefox */
+    -ms-backface-visibility: hidden;
+    /* Internet Explorer */
+}
+/***************************This is for the basicInfo.html**************************/
+
+#info-content input:disabled {
+    background-color: #ffffff;
+}
+#info-content input{
+    border:none;
+    vertical-align: middle;
+}
+#content section{
+    display: inline;
+}
+section.v-item input {
+    width: 20%;
+}
+section.b-item input{
+    width: 40%;
+}
+span.coin{
+    background:url("../images/coin.png") no-repeat 1px 12px;
+    display: inline-block;
+    padding-right:15px;
+}
+p button {
+    position:relative;
+    left: 32%;
+}
+
+#v-info label{
+    text-align: right;
+    width: 150px;
+}
+
+/* searchQuestion.html的样式 */
+div.question-list h2 a{
+    color: #204d74;
+    margin-left: 60px;
+    font-size: 24px;
+}
+
+div.question-list p {
+    margin-left: 60px;
+    font-size: 0.8em;
+    color: #222222;
+}
+
+.row-list{
+    margin-right: -30px;
+    margin-left: -30px;
+}

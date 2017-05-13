@@ -1,0 +1,328 @@
+/* 这是user.html的样式 */
+
+img.img-rounded {
+    position: relative;
+    left: 25%;
+}
+div#user-name span{
+    position: relative;
+    left: 25%;
+}
+
+#side hr{
+    margin: 10px;
+    background-color: gainsboro;
+    border: none;
+    height: 1px;
+}
+
+a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dropdown-toggle:active{
+    text-decoration: none;
+    text-color: black;
+}
+
+#function-list{
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+.dropdown ul{
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+
+.user-button label,.dropdown ul li {
+    display: block;
+    width: 200px;
+    background: #ECF0F1;
+    opacity: 0.7;
+    padding: 15px 20px;
+}
+#basic label:hover, #basic label, #basic input{
+    color: rgb(72, 222, 240);
+    border-left: 4px solid rgb(72, 222, 240);
+}
+#questionnaire label:hover, #questionnaire label, #questionnaire input{
+    color: rgb(130,  171, 186);
+    border-left: 4px solid rgb(130, 171, 186);
+}
+#safe label:hover, #safe label, #safe input{
+    color: rgb(182, 200, 20);
+    border-left: 4px solid rgb(182, 200, 20);
+}
+#basic label:hover
+{
+    background:rgb(72, 222, 240);
+    color:white;
+}
+#questionnaire label:hover
+{
+    background:rgb(130,  171, 186);
+    color:white;
+}
+#safe label:hover
+{
+    background:rgb(182, 200, 20);
+    color:white;
+}
+
+.dropdown label:hover, .dropdown ul li:hover {
+    background: #1ABC9C;
+    color: white;
+    cursor: pointer;
+}
+
+.user-button label {
+    border-radius: 0 5px 0 0;
+    position: relative;
+    z-index: 2;
+}
+.dropdown label{
+    color: #1ABC9C;
+    border-left: 4px solid #1ABC9C;
+}
+
+.user-button input{
+    display: none;
+}
+
+.dropdown input ~ ul {
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    top: -20px;
+    z-index: 1;
+}
+
+.dropdown input:checked ~ ul {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+}
+.animate {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Chrome and Safari */
+    -moz-backface-visibility: hidden;
+    /* Firefox */
+    -ms-backface-visibility: hidden;
+    /* Internet Explorer */
+}
+/***************************This is for the basicInfo.html**************************/
+
+#info-content input:disabled {
+    background-color: #ffffff;
+}
+#info-content input{
+    border:none;
+    vertical-align: middle;
+}
+#info-content section{
+    display: inline;
+}
+#v-info{
+    margin-top: 30px;
+}
+#b-info{
+    margin-top: 20px;
+}
+section.v-item input {
+    width: 20%;
+}
+section.b-item input{
+    width: 40%;
+}
+span.coin{
+    background:url("../images/coin.png") no-repeat 1px 12px;
+    display: inline-block;
+    padding-right:15px;
+}
+p button, p a span{
+    position:relative;
+    left: 32%;
+}
+#info-content hr{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-top: 3px solid #eeeeee;
+}
+#v-info label{
+    text-align: right;
+    width: 150px;
+}
+/***************************This is for the safe.html******************************/
+.content, .user-content{
+    margin-top: 50px;
+}
+/**************************This is for myFriend.html******************************/
+.content h3.panel-title, .user-content h3.panel-title, h3.panel-title{
+    font-size:  28px;
+}
+.content li.list-group-item, .user-content li.list-group-item, li.list-group-item{
+    font-size: 18px;
+}
+/*
+.user-content, .user-content>div{
+    margin-top: 30px;
+}
+div.search-user{
+    margin-left: 50%;
+}
+div.search-user span{
+    margin:0;
+}
+div.search-user input{
+    margin: 0;
+
+}
+*/
+
+/****************************This is for the searchUser.html*************************/
+.cf:before, .cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    zoom: 1;
+}
+/* Form wrapper styling */
+
+.form-wrapper {
+    width: 550px;
+    padding: 15px;
+    background-color: rgba(240, 240, 240, 0.4);
+    border-radius: 10px;
+}
+
+/* Form text input */
+
+.form-wrapper input {
+    width: 400px;
+    height: 40px;
+    padding: 10px 5px;
+    float: left;
+    font: bold 15px ‘lucida sans’, ‘trebuchet MS’, ‘Tahoma’;
+    border: 0;
+    background: rgba(100, 200, 120, 0.2);
+    border-radius: 3px 0 0 3px;
+}
+
+.form-wrapper input:focus {
+    outline: 0;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.form-wrapper input::-webkit-input-placeholder {
+    color: rgba(240, 240, 240, 0.5);
+    font-weight: normal;
+    font-style: italic;
+}
+
+.form-wrapper input:-moz-placeholder {
+    color: rgba(240, 240, 240, 0.5);
+    font-weight: normal;
+    font-style: italic;
+}
+
+.form-wrapper input:-ms-input-placeholder {
+    color: rgba(255, 245, 245, 0.5);
+    font-weight: normal;
+    font-style: italic;
+}
+
+/* Form submit button */
+
+.form-wrapper button {
+    overflow: visible;
+    position: relative;
+    float: right;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 110px;
+    font: bold 15px/40px ‘lucida sans’, ‘trebuchet MS’, ‘Tahoma’;
+    color: #fff;
+    text-transform: uppercase;
+    background: #d83c3c;
+    border-radius: 0 3px 3px 0;
+    text-shadow: 0 -1px 0 rgba(140, 240 ,240, 0.5);
+}
+
+.form-wrapper button:hover {
+    background: #e54040;
+}
+
+.form-wrapper button:active,
+
+.form-wrapper button:focus {
+    background: #c42f2f;
+    outline: 0;
+}
+
+.form-wrapper button:before {
+    /* left arrow */
+    content: "";
+    position: absolute;
+    border-width: 8px 8px 8px 0;
+    border-style: solid solid solid none;
+    border-color: transparent #d83c3c transparent;
+    top: 12px;
+    left: -6px;
+}
+
+.form-wrapper button:hover:before {
+    border-right-color: #e54040;
+}
+
+.form-wrapper button:focus:before,
+
+.form-wrapper button:active:before {
+    border-right-color: #c42f2f;
+}
+
+.form-wrapper button::-moz-focus-inner {
+    /* remove extra button spacing for Mozilla Firefox */
+    border: 0;
+    padding: 0;
+}
+
+input#fetch-questionnaire {
+    border: none;
+    color: white;
+    background-color: white;
+}
+.panel.panel-warning.questionnaire-list {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

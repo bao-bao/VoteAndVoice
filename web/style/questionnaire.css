@@ -1,0 +1,279 @@
+/************************ creatingQuestionnaire1.html *******************************/
+#main hr{
+    border: none;
+    border-top: groove 5px;
+    background-color: inherit;
+}
+.order{
+    border-style: solid groove;
+    border-width: 5px;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: xx-large;
+}
+.order-title{
+    font-size: large;
+}
+div.qtype.btn-group-lg button.btn.btn-default{
+    margin-left: 40px;
+    margin-bottom: 20px;
+    outline:none;
+    background-color: white;
+    color: black;
+    border-color: #cccccc;
+}
+div.qtype.btn-group-lg button.btn.btn-default:focus{
+    background-color: white;
+    color: black;
+    border-color: #cccccc;
+}
+div.qtype.btn-group-lg button.btn.btn-default:active{
+    background-color: white;
+    color: black;
+    border-color: #cccccc;
+}
+.content-title{
+    font-size: large;
+}
+div.next-button{
+    margin-top: 100px;
+    font-size: large;
+    outline:none;
+}
+input.tag{
+    display: inline;
+    margin-left: 8%;
+    margin-top: 5px;
+    border-radius: 2px;
+    border: 1px solid #cccccc;
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    width: 60%;
+    margin-bottom: 10px;
+}
+p button.btn.btn-success{
+    display: inline;
+    margin: 0;
+    margin-bottom: 10px;
+}
+/************************ creatingQuestionnaire2.html *******************************/
+div button.btn.btn-success:focus{
+    background-color: green;
+    color: white;
+    border-color: #cccccc;
+}
+div button.btn.btn-warning:focus{
+    background-color: orange;
+    color:white;
+    border-color: #cccccc;
+}
+div#choose{
+    margin-bottom: 20px;
+}
+div#choose p{
+    font-size: 15px;
+    color: gray;
+    margin: 0;
+}
+div#choose span.btn.btn-success{
+    margin-bottom: 20px;
+}
+div#choose span.btn.btn-default{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+/********************creatingQuestionnaire3.html*****************************/
+section button:nth-child(1){
+    margin-right: 60px;
+}
+section button:nth-child(2){
+    margin-left: 60px;
+}
+/*************************creatingQuestionnaire5.html*************************************************/
+div#success h3{
+    color: rgba(10, 10, 10, 0.7);
+    font-size: 30px;
+}
+/***************************constructingQuestionnaire.html*********************************************/
+div#questionType{
+
+}
+div#questionType ul li.list-group-item:first-child{
+    background-color: #eee;
+    font-weight: bold;
+    font-size: 20px;
+}
+div#questionType ul li.question-type img{
+    float: left;
+}
+div#questionType ul li.question-type:hover{
+    cursor: pointer;
+    background-color: rgba(108, 200, 160, 0.5);
+}
+
+/*noinspection CssInvalidPropertyValue*/
+div.qnaire-out{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+div.qnaire-out.qnaire-main-title{
+    padding: 0;
+}
+/*
+div.qnaire-out.qnaire-single-question{
+    height: 150px;
+}
+*/
+div.text-center.qnaire{
+    font-size: 20px;
+    font-weight: bold;
+}
+div.qnaire{
+    font-size: 16px;
+    border:none;
+}
+div.qnaire:hover, div.qnaire:active, div.qnaire:focus{
+    background-color: rgba(253, 249, 205, 0.6);
+    border: 1px solid #ccc;
+}
+div.qnaire.qnaire-title{
+    font-weight: bold;
+}
+div.qnaire-out-inside div{
+    display:inline-block;
+    width: 80%;
+}
+div.error-tips{
+    font-size: 5px;
+    color: red;
+}
+div.add, div.pse-add{
+    display:inline-block;
+}
+div.operate{
+    float: right;
+}
+div.add span{
+    background-image: url("../images/add.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    margin-top: 10px;
+}
+div.pse-add span{
+    display: inline-block;
+    width: 25px;
+    height: 20px;
+    margin-top: 10px;
+}
+div.add span:hover, div.add span:active{
+    cursor: pointer;
+    background-image:url("../images/add_highlight.png");
+    background-repeat: no-repeat;
+}
+div.qnaire-out-inside input, div.qnaire-out-inside span{
+    margin-right: 5px;
+}
+div.operate {
+    display: inline-block;
+    margin-right: 30px;
+    height: 36px;
+    cursor: pointer;
+}
+.operate li {
+    list-style: none;
+    float: left;
+    margin: 0 12px;
+    width: 23px;
+    height: 23px;
+}
+li.question-up{
+    background:url("../images/arrow.png") no-repeat;
+    background-position:0 2px;
+}
+li.question-down{
+    background:url("../images/arrow.png") no-repeat;
+    background-position:0 -19px;
+}
+li.question-up:hover{
+    background:url("../images/arrow_highlight.png") no-repeat;
+    background-position:0 2px;
+}
+li.question-down:hover{
+    background:url("../images/arrow_highlight.png") no-repeat;
+    background-position:0 -19px;
+}
+li.set-logic{
+    background:url("../images/handle.png") no-repeat;
+}
+li.question-copy{
+    background:url("../images/handle.png") no-repeat;
+    background-position: -88px 0;
+}
+li.question-delete{
+    background:url("../images/handle.png") no-repeat;
+    background-position: -178px 0;
+}
+li.set-logic:hover{
+    background:url("../images/handle_highlight.png") no-repeat;
+}
+li.question-copy:hover{
+    background:url("../images/handle_highlight.png") no-repeat;
+    background-position: -88px 0;
+}
+li.question-delete:hover{
+    background:url("../images/handle_highlight.png") no-repeat;
+    background-position: -178px 0;
+}
+div.qnaire.qnaire-content{
+    border: 1px solid #ccc;
+}
+button#preview{
+    background-color: rgba(30, 100, 250, 0.3);
+    margin-left: 20%;
+    font-weight: bold;
+    font-size: larger;
+}
+span.qorder{
+    position: relative;
+    vertical-align: top;
+}
+form#form_qnaire{
+	margin: 0;
+	padding: 0;
+	height: 0;
+	width: 0;
+}
+button#sub_qnaire{
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	border:none;
+}
+
+div#modal_preview div.modal-content{
+	width: 150%;
+	left: -16%;
+	top: 10%;
+}
+body{
+	padding: 0!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+

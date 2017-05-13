@@ -1,0 +1,16 @@
+
+/* question.html的样式 */
+div#q-text ul li{
+    margin-top: 25px;
+}
+
+#chart{
+    width: 600px;
+    height:400px;
+    margin: 0 auto;
+}
+#chart-pie{
+    width: 600px;
+    height:400px;
+    margin: 0 auto;
+}
