@@ -914,7 +914,7 @@ function onClickSave(){
     addCookie('qanda', jqanda, 1);
 
     window.alert("保存成功");
-    window.location.href="/VoteAndVoice/index.jsp";
+    window.location.href="/VoteAndVoice/SaveQuestionnaire";
 }
 function processQnaire(order, single, multiple, qanda){
 	var jorder = eval('(' + order + ')' );
