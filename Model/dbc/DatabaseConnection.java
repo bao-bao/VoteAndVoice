@@ -10,7 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 public class DatabaseConnection {
 
 	private static final String DBDRIVER = "com.mysql.jdbc.Driver";
-	private static final String DBURL = "jdbc:mysql://100.64.11.43:3307";	//"jdbc:mysql://127.0.0.1:3306";
+	private static final String DBURL = "jdbc:mysql://100.64.11.43:3307";  //"jdbc:mysql://127.0.0.1:3306";
 	private static final String DBuser = "T16";
 	private static final String DBPASSWORD = "bFr341Cl";
 	private Connection conn = null;
