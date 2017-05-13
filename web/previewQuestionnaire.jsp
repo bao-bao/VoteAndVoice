@@ -55,14 +55,15 @@
 	<button type="submit" id="submit_qn"></button>
 </form>
 <script>
-	var title = unescape(getCookie('title'));
-	var des = unescape(getCookie('des'));
-	var order = unescape(getCookie('order'));
-	var single = unescape(getCookie('single'));
-	var multiple = unescape(getCookie('multiple'));
-	var qanda = unescape(getCookie('qanda'));
+    var title = decodeURI(localStorage.getItem('title'));
+    var des = decodeURI(localStorage.getItem('des'));
+    var order = decodeURI(localStorage.getItem('order'));
+    var single = decodeURI(localStorage.getItem('single'));
+    var multiple = decodeURI(localStorage.getItem('multiple'));
+    var qanda = decodeURI(localStorage.getItem('qanda'));
 
-	console.log(order)///
+
+    console.log(order)///
 	console.log(single)///
 	console.log(multiple)///
 	console.log(qanda)///

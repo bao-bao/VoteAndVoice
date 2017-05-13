@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%
-	String title = (String)request.getAttribute("title");
+    String u_id = (String)request.getAttribute("u_id");
+    String qn_id = (String)request.getAttribute("qn_id");
+    String title = (String)request.getAttribute("title");
 	String des = (String)request.getAttribute("des");
 	String order = (String)request.getAttribute("order");
 	String single = (String)request.getAttribute("single");
@@ -18,8 +20,26 @@
     <link rel="stylesheet" href="style/answer.css">
     <script src="script/jquery.min.js"></script>
     <script src="script/main.js"></script>
+    <script>
+        var u_id = '<%=u_id%>';
+        var qn_id = '<%=qn_id%>';
+        var jiathis_config = {
+            url: "u_id=" + u_id + "&qn_id=" + qn_id,
+            title: "问卷分享",
+            summary: "分享问卷，让大家一起来填"
+        }
+    </script>
+
 </head>
 <body>
+<div id="ckepop">
+    <span class="jiathis_txt">分享到：</span>
+    <a class="jiathis_button_weixin">微信</a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+       target="_blank">更多</a>
+    <a class="jiathis_counter_style"></a>
+</div>
+
 <!-- 问卷框架 -->
 <div class="wjContent clear" id="survey_page">
     <!-- 问卷标题 -->
@@ -54,5 +74,7 @@
 	processQnaire(order, single, multiple, qanda);
 
 </script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+<script src="http://v2.jiathis.com/code/jiathis_r.js?move=0"></script>
 </body>
 </html>
