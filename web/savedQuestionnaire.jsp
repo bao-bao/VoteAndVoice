@@ -6,7 +6,7 @@
              import = "java.util.*"
 %>
 <%
-    ArrayList<ExDbquestionnaire> savedQustionnaireList = (ArrayList<ExDbquestionnaire>)request.getAttribute("savedQustionnaireList");
+    ArrayList<ExDbquestionnaire> savedQuestionnaireList = (ArrayList<ExDbquestionnaire>)request.getAttribute("savedQuestionnaireList");
 %>
 
 <%@ include file="user.jsp" %>
@@ -17,21 +17,21 @@
 <div id="q-content" class="col-md-offset-1 col-md-8">
     <div class="content">
         <%
-            for (int i = 0; i < savedQustionnaireList.size(); ++i)
+            for (int i = 0; i < savedQuestionnaireList.size(); ++i)
             {%>
         <div class="panel panel-warning questionnaire-search-list">
             <div class="panel-heading">
-                <h3 clas="panel-title"><%=savedQustionnaireList.get(i).getQuestionnaire().get_transQn_title() %></h3>
+                <h3 clas="panel-title"><%=savedQuestionnaireList.get(i).getQuestionnaire().get_transQn_title() %></h3>
             </div>
             <div class="panel-body">
                 <form action="ContinueQuestionnaire" method="post">
-                    <%=savedQustionnaireList.get(i).get_transS_name() + ' ' + savedQustionnaireList.get(i).getQuestionnaire().get_transQn_state() %>
+                    <%=savedQuestionnaireList.get(i).get_transS_name() + ' ' + savedQuestionnaireList.get(i).getQuestionnaire().get_transQn_state() %>
                     <%
-                        String state = savedQustionnaireList.get(i).get_transQuestionnaire().get_transQn_state();
+                        String state = savedQuestionnaireList.get(i).get_transQuestionnaire().get_transQn_state();
                         if(state.equals("未完成")) {
                     %>
 
-                    <input type="hidden" name="qn_id" value="<%=savedQustionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
+                    <input type="hidden" name="qn_id" value="<%=savedQuestionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
                     <input type="hidden" name="btntype" id="btntype" value="" />
                     <button type="submit" class="btn btn-success btn-lg" onclick="document.getElementById('btntype').value=0">继续编辑</button>
                     <button type="submit" class="btn btn-danger btn-lg" onclick="document.getElementById('btntype').value=1">删除</button>
@@ -41,7 +41,7 @@
                     %>
                 </form>
             </div>
-            <div class="panel-footer"><%=savedQustionnaireList.get(i).getQuestionnaire().get_transQn_starttime() %></div>
+            <div class="panel-footer"><%=savedQuestionnaireList.get(i).getQuestionnaire().get_transQn_starttime() %></div>
         </div>
         <%}
         %>
@@ -61,9 +61,9 @@
 <form action="" method="post" id="fetchingQuestionnaire">
     <%
         ArrayList<String> idList = new ArrayList<String>();
-        if (savedQustionnaireList != null) {
-            for (int i = 0; i < savedQustionnaireList.size(); ++i) {
-                idList.add(savedQustionnaireList.get(i).getQuestionnaire().get_transQn_id());
+        if (savedQuestionnaireList != null) {
+            for (int i = 0; i < savedQuestionnaireList.size(); ++i) {
+                idList.add(savedQuestionnaireList.get(i).getQuestionnaire().get_transQn_id());
             }
         }
         session.setAttribute("questionnaire", idList);

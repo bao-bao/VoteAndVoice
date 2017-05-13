@@ -544,6 +544,7 @@ public class CreateQnDAO {
 			pstmtQn.setString(10,qn.getQn_delay());
 			int i = pstmtQn.executeUpdate();
 			dbconn.close();
+			message = SUCCESS;
 		} catch (Exception e) {
 			message = EXCEPTION;
 			e.printStackTrace();
@@ -582,7 +583,7 @@ public class CreateQnDAO {
 
 	public int deleteQnDelayByQnId(String QnId) {
 		int message = FAILED;
-		String sqlQn = "(delete from db_16.questionnaire where qn_id=? ";
+		String sqlQn = "delete from db_16.questionnaire where qn_id=? ";
 		try {
 			PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
 			pstmtQn.setString(1, QnId);

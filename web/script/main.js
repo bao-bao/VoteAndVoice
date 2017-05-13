@@ -848,7 +848,6 @@ function onClickPreview(){
 	
 	window.open("/VoteAndVoice/previewQuestionnaire.jsp");
 }
-
 function onClickSave(){
     var title = document.getElementsByClassName("qnaire-main-title")[0];
     title = title.innerText;
@@ -912,16 +911,16 @@ function onClickSave(){
     console.log(jsingle)///
     console.log(jmultiple)///
     console.log(jqanda)///
-    addCookie('title', title, 1);
-    addCookie('des', des, 1);
-    addCookie('order', jorder, 1);
-    addCookie('single', jsingle, 1);
-    addCookie('multiple', jmultiple, 1);
-    addCookie('qanda', jqanda, 1);
+    addLocalStorage('title', title);
+    addLocalStorage('des', des);
+    addLocalStorage('order', jorder);
+    addLocalStorage('single', jsingle);
+    addLocalStorage('multiple', jmultiple);
+    addLocalStorage('qanda', jqanda);
 
-    window.alert("保存成功");
-    window.location.href="/VoteAndVoice/SaveQuestionnaire";
+    window.open("/VoteAndVoice/previewSavedQuestionnaire.jsp");
 }
+
 function processQnaire(order, single, multiple, qanda){
 	var jorder = eval('(' + order + ')' );
 	var jsingle = eval( '(' + single + ')' );
