@@ -38,6 +38,9 @@ public class SearchQnDAO {
 		if(state != null) {
 			screenString += " and qn_state = '" + state + "' ";
 		}
+		else{
+			screenString += " and qn_state != 'dly' ";
+		}
 		if(q_min != -1) {
 			screenString += " and qn_q_count >= " + q_min + " ";
 		}
