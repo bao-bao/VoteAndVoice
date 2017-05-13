@@ -17,14 +17,14 @@ import dao.RegisterDAO;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RegisterServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,20 +35,20 @@ public class RegisterServlet extends HttpServlet {
 		String user_name =  request.getParameter("register_name");
 		String user_pw = request.getParameter("register_pw");
 		String user_pw_confirm = request.getParameter("register_pw_confirm");
-		
+
 		String rejson  = null;
-		
+
 		int message = DAOFactory.getRegisterDAO().register(user_name, user_pw, null, null, null, null, null, null, null);
 		switch(message){
-		case RegisterDAO.SUCCESS:
-			rejson = "{'errorMessage':'×¢²á³É¹¦'}";
-			break;
-		case RegisterDAO.EXIST:
-			rejson = "{'errorMessage': '¸ÃÓÃ»§idÒÑ¾­±»ÇÀ×¢'}";
-			break;
-		case RegisterDAO.EXCEPTION:
-			rejson = "{'errorMessage': 'ºóÌ¨¹ÊÕÏ'}";
-			break;
+			case RegisterDAO.SUCCESS:
+				rejson = "{'errorMessage':'æ³¨å†ŒæˆåŠŸ'}";
+				break;
+			case RegisterDAO.EXIST:
+				rejson = "{'errorMessage': 'è¯¥ç”¨æˆ·idå·²ç»è¢«æŠ¢æ³¨'}";
+				break;
+			case RegisterDAO.EXCEPTION:
+				rejson = "{'errorMessage': 'åå°æ•…éšœ'}";
+				break;
 		}
 		System.out.println(rejson);
 		PrintWriter pw = response.getWriter();

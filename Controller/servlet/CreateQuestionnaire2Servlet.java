@@ -17,14 +17,14 @@ import vo.ExDbquestionnaire;
 @WebServlet("/CreateQuestionnaire_payment")
 public class CreateQuestionnaire2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateQuestionnaire2Servlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CreateQuestionnaire2Servlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,17 +35,17 @@ public class CreateQuestionnaire2Servlet extends HttpServlet {
 		ExDbquestionnaire newExQn = (ExDbquestionnaire) session.getAttribute("newExQn");
 		if(authority != null && newExQn != null) {
 			authority = new String(authority.getBytes("ISO-8859-1"), "utf-8");
-			//System.out.println(authority + authority.equals("¹«¿ª"));
-			if(authority.equals("Ë½ÓĞ")) {
-				newExQn.get_transQuestionnaire().set_transQn_authority("Ë½ÓĞ");
+			//System.out.println(authority + authority.equals("å…¬å¼€"));
+			if(authority.equals("ç§æœ‰")) {
+				newExQn.get_transQuestionnaire().set_transQn_authority("ç§æœ‰");
 				session.setAttribute("newExQn", newExQn);
-				//¹ø
+				//é”…
 				//System.out.println(newExQn.getQuestionnaire().getQn_authority());
 				//session.setAttribute("createQnStage", 2);
 				request.getRequestDispatcher("creatingQuestionnaire3.jsp").forward(request, response);
 			}
-			else if (authority.equals("¹«¿ª")) {
-				newExQn.get_transQuestionnaire().set_transQn_authority("¹«ÓĞ");
+			else if (authority.equals("å…¬å¼€")) {
+				newExQn.get_transQuestionnaire().set_transQn_authority("å…¬æœ‰");
 				session.setAttribute("newExQn", newExQn);
 				//System.out.println(newExQn.getQuestionnaire().getQn_authority());
 				//session.setAttribute("createQnStage", 4);
@@ -67,10 +67,10 @@ public class CreateQuestionnaire2Servlet extends HttpServlet {
 			createQnStage = 0;
 		}
 		if(createQnStage > 1) {
-			if(newExQn.get_transQuestionnaire().get_transQn_authority().equals("¹«ÓĞ")) {
+			if(newExQn.get_transQuestionnaire().get_transQn_authority().equals("å…¬æœ‰")) {
 				request.getRequestDispatcher("creatingQuestionnaire3.jsp").forward(request, response);
 			}
-			else if(newExQn.get_transQuestionnaire().get_transQn_authority().equals("Ë½ÓĞ")) {
+			else if(newExQn.get_transQuestionnaire().get_transQn_authority().equals("ç§æœ‰")) {
 				response.sendRedirect("CreateQuestionnaire_main");
 			}
 		}

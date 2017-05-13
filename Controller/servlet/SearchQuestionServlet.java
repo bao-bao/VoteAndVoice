@@ -20,14 +20,14 @@ import vo.ExDbquestion;
 @WebServlet("/SearchQuestion")
 public class SearchQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SearchQuestionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SearchQuestionServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,10 +43,10 @@ public class SearchQuestionServlet extends HttpServlet {
 		String order = null;
 		String q_type = null;
 		String qn_type = null;
-		if(questionType.equals("µ•—°Ã‚")) q_type = "sin";
-		else if(questionType.equals("∂‡—°Ã‚")) q_type = "mul";
-		else if(questionType.equals("Œ ¥Ã‚")) q_type = "que";
-		if(!questionnaireType.equals("»´≤ø")) {
+		if(questionType.equals("ÂçïÈÄâÈ¢ò")) q_type = "sin";
+		else if(questionType.equals("Â§öÈÄâÈ¢ò")) q_type = "mul";
+		else if(questionType.equals("ÈóÆÁ≠îÈ¢ò")) q_type = "que";
+		if(!questionnaireType.equals("ÂÖ®ÈÉ®")) {
 			qn_type = questionnaireType;
 		}
 		ArrayList<ExDbquestion> exQList = new ArrayList<ExDbquestion>();

@@ -21,14 +21,14 @@ import vo.Dbuser;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,37 +38,37 @@ public class LoginServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String user_id = request.getParameter("login_name");
 		String user_pw = request.getParameter("login_pw");
-		
+
 		String rejson = null;
-		
+
 		if(user_id != null && user_pw != null){
 			ArrayList<Dbuser> loginUserList = new ArrayList<Dbuser>();
 			int message = DAOFactory.getLoginDAO().login(user_id, user_pw, loginUserList);
 			switch(message){
-			case LoginDAO.SUCCESS:
-				HttpSession session = request.getSession(true);
-				Dbuser loginUser = loginUserList.get(0);
-				session.setAttribute("loginUser", loginUser);
-				rejson = "{'errorMessage':'*µÇÂ½³É¹¦'}";
-				break;
-			case LoginDAO.WRONG_ID:
-				rejson = "{'errorMessage':'*ÓÃ»§id´íÎó'}";
-				break;
-			case LoginDAO.WRONG_PWD:
-				rejson = "{'errorMessage':'*ÃÜÂë´íÎó'}";
-				break;
-			case LoginDAO.EXCEPTION:
-				rejson = "{'errorMessage':'*ºóÌ¨¹ÊÕÏ'}";
-				break;
+				case LoginDAO.SUCCESS:
+					HttpSession session = request.getSession(true);
+					Dbuser loginUser = loginUserList.get(0);
+					session.setAttribute("loginUser", loginUser);
+					rejson = "{'errorMessage':'*ç™»é™†æˆåŠŸ'}";
+					break;
+				case LoginDAO.WRONG_ID:
+					rejson = "{'errorMessage':'*ç”¨æˆ·idé”™è¯¯'}";
+					break;
+				case LoginDAO.WRONG_PWD:
+					rejson = "{'errorMessage':'*å¯†ç é”™è¯¯'}";
+					break;
+				case LoginDAO.EXCEPTION:
+					rejson = "{'errorMessage':'*åå°æ•…éšœ'}";
+					break;
 				default: break;
 			}
-			
+
 		}
 		else{
-			rejson = "{'errorMessage':'*¿Õ×Ö¶Î£¬ÇëÌîĞ´'}";
+			rejson = "{'errorMessage':'*ç©ºå­—æ®µï¼Œè¯·å¡«å†™'}";
 		}
 		System.out.println(rejson);
-		//Ğ´»ØJSON
+		//å†™å›JSON
 		PrintWriter pw = response.getWriter();
 		pw.print(rejson);
 		pw.flush();

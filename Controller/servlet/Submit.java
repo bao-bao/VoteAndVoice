@@ -22,14 +22,14 @@ import net.sf.json.*;
 @WebServlet("/submit")
 public class Submit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Submit() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Submit() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,73 +41,73 @@ public class Submit extends HttpServlet {
 		System.out.println(answer);
 		System.out.println(u_id + "   "+qn_id);
 		JSONObject janswer = JSONObject.fromObject(answer);
-		
+
 		ArrayList<ExDbquestionnaire> exQnList = new ArrayList<ExDbquestionnaire>();
 		int message = DAOFactory.getGetResultDAO().getQnResultByQnId(qn_id, exQnList);
-		
+
 		String rejson = null;
 		if(message == GetResultDAO.EXCEPTION || message == GetResultDAO.FAILED){
-			rejson = "{'errorMessage': '获取故障'}";
+			rejson = "{'errorMessage': '鑾峰彇鏁呴殰'}";
 			return;
 		}
 		ArrayList<ExDbquestion> qList = exQnList.get(0).get_transExQuestionList();
-		
+
 		ArrayList<Dbanswer> result = new ArrayList<Dbanswer>();
 		for(int i = 0; i < qList.size(); ++ i){
 			Dbquestion thisq = qList.get(i).get_transQuestion();
 			ArrayList<ExDbitem> itemList = qList.get(i).getExItemList();
-			
+
 			BigDecimal q_id = thisq.getQ_id();
-			
+
 			System.out.println(q_id);
 			String type = thisq.getQ_type();
-		if(janswer.containsKey(String.valueOf(i))) {/////
-			if(type.equals("sin") == true){
-				Dbanswer an = new Dbanswer();
-				an.set_transQn_id(qn_id);
-				an.set_transU_id(u_id);
-				an.setQ_id(q_id);
-				int option = janswer.getInt(String.valueOf(i));
-				an.setI_id(itemList.get(option).get_transItem().getI_id());
-				result.add(an);
-			}
-			else if(type.equals("mul") == true){
-				JSONArray options = janswer.getJSONArray(String.valueOf(i));
-				for(int j = 0; j < options.size(); ++ j){
+			if(janswer.containsKey(String.valueOf(i))) {/////
+				if(type.equals("sin") == true){
 					Dbanswer an = new Dbanswer();
 					an.set_transQn_id(qn_id);
 					an.set_transU_id(u_id);
 					an.setQ_id(q_id);
-					
-					int option = options.getInt(j);
+					int option = janswer.getInt(String.valueOf(i));
 					an.setI_id(itemList.get(option).get_transItem().getI_id());
 					result.add(an);
 				}
-			}
-			else if(type.equals("que") == true){
-				Dbanswer an = new Dbanswer();
-				an.set_transQn_id(qn_id);
-				an.set_transU_id(u_id);
-				an.setQ_id(q_id);
-				System.out.println(itemList.size());
-				if(itemList.size() > 0) an.setI_id(itemList.get(0).get_transItem().getI_id());
-				else an.set_transI_id(1);
-				String a_content = janswer.getString(String.valueOf(i));
-				an.set_transA_content(a_content);
-				result.add(an);
-			}
-		}/////
+				else if(type.equals("mul") == true){
+					JSONArray options = janswer.getJSONArray(String.valueOf(i));
+					for(int j = 0; j < options.size(); ++ j){
+						Dbanswer an = new Dbanswer();
+						an.set_transQn_id(qn_id);
+						an.set_transU_id(u_id);
+						an.setQ_id(q_id);
+
+						int option = options.getInt(j);
+						an.setI_id(itemList.get(option).get_transItem().getI_id());
+						result.add(an);
+					}
+				}
+				else if(type.equals("que") == true){
+					Dbanswer an = new Dbanswer();
+					an.set_transQn_id(qn_id);
+					an.set_transU_id(u_id);
+					an.setQ_id(q_id);
+					System.out.println(itemList.size());
+					if(itemList.size() > 0) an.setI_id(itemList.get(0).get_transItem().getI_id());
+					else an.set_transI_id(1);
+					String a_content = janswer.getString(String.valueOf(i));
+					an.set_transA_content(a_content);
+					result.add(an);
+				}
+			}/////
 		}
 		message = DAOFactory.getAnswerQnDAO().answerQn(result);
 		if(message == GetResultDAO.EXCEPTION || message == GetResultDAO.FAILED){
-			rejson = "{'errorMessage': '提交故障'}";
+			rejson = "{'errorMessage': '鎻愪氦鏁呴殰'}";
 			return;
 		}
 		else if(message == GetResultDAO.SUCCESS){
 			rejson = "{'errorMessage': 'success'}";
 		}
 		System.out.println(rejson);
-		//写回JSON
+		//鍐欏洖JSON
 		PrintWriter pw = response.getWriter();
 		pw.print(rejson);
 		pw.flush();
@@ -123,23 +123,3 @@ public class Submit extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

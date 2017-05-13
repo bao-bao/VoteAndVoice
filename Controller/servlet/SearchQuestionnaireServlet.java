@@ -20,14 +20,14 @@ import vo.ExDbquestionnaire;
 @WebServlet("/SearchQuestionnaire")
 public class SearchQuestionnaireServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SearchQuestionnaireServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SearchQuestionnaireServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,20 +50,20 @@ public class SearchQuestionnaireServlet extends HttpServlet {
 		String type = null;
 		long a_min = -1;
 		long a_max = -1;
-		if(orderby.equals("×î½ü¿ªÊ¼")) order = "qn_starttime desc";
-		else if(orderby.equals("×î½ü½áÊø")) order = "qn_endtime desc";
-		else if(orderby.equals("×î¶àÎÊÌâ")) order = "qn_q_count desc";
-		else if(orderby.equals("×îÉÙÎÊÌâ")) order = "qn_q_count";
-		else if(orderby.equals("×î¶à»Ø´ğ")) order = "qn_a_count desc";
-		state = null;//ÕâÀï¸Ä×´Ì¬////////////////////////
+		if(orderby.equals("æœ€è¿‘å¼€å§‹")) order = "qn_starttime desc";
+		else if(orderby.equals("æœ€è¿‘ç»“æŸ")) order = "qn_endtime desc";
+		else if(orderby.equals("æœ€å¤šé—®é¢˜")) order = "qn_q_count desc";
+		else if(orderby.equals("æœ€å°‘é—®é¢˜")) order = "qn_q_count";
+		else if(orderby.equals("æœ€å¤šå›ç­”")) order = "qn_a_count desc";
+		state = null;//è¿™é‡Œæ”¹çŠ¶æ€////////////////////////
 		String[] q_count = totalNum.split("-");
-		if(q_count.length == 2 && !totalNum.equals("È«²¿")) {
+		if(q_count.length == 2 && !totalNum.equals("å…¨éƒ¨")) {
 			q_min = Long.parseLong(q_count[0]);
 			if(!q_count[1].equals("more")) q_max = Long.parseLong(q_count[1]);
 		}
-		if(!qType.equals("È«²¿")) type = qType;
+		if(!qType.equals("å…¨éƒ¨")) type = qType;
 		String[] a_count = collectNum.split("-");
-		if(a_count.length == 2 && !totalNum.equals("È«²¿")) {
+		if(a_count.length == 2 && !totalNum.equals("å…¨éƒ¨")) {
 			a_min = Long.parseLong(a_count[0]);
 			if(!a_count[1].equals("more")) a_max = Long.parseLong(a_count[1]);
 		}
@@ -78,7 +78,7 @@ public class SearchQuestionnaireServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher("searchQuestionnaire.jsp").forward(request, response);
 	}
-	
+
 	public String toUTF8(String origin) {
 		if(origin == null) {
 			return null;
