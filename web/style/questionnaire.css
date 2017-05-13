@@ -240,6 +240,13 @@ button#preview{
     font-weight: bold;
     font-size: larger;
 }
+button#save{
+     background-color: rgba(30, 100, 250, 0.3);
+     margin-top: 8%;
+     margin-left: 20%;
+     font-weight: bold;
+     font-size: larger;
+ }
 span.qorder{
     position: relative;
     vertical-align: top;

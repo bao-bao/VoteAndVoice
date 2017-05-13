@@ -55,6 +55,10 @@ a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dro
     color: rgb(182, 200, 20);
     border-left: 4px solid rgb(182, 200, 20);
 }
+#save label:hover, #save label, #save input{
+     color: rgb(226, 102, 239);
+     border-left: 4px solid rgb(226, 102, 239);
+ }
 #basic label:hover
 {
     background:rgb(72, 222, 240);
@@ -70,6 +74,11 @@ a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dro
     background:rgb(182, 200, 20);
     color:white;
 }
+#save label:hover
+ {
+     background:rgb(226, 102, 239);
+     color:white;
+ }
 
 .dropdown label:hover, .dropdown ul li:hover {
     background: #1ABC9C;
