@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Dbquestionnaire {
-	
+
 	private String qn_id = "0";
 	private String s_id = "0";
 	private String qn_title = "";
 	private String qn_des = "";
-	private String qn_type = "ÆäËü";
-	private String qn_tag = "ÆäËü";
+	private String qn_type = "å…¶å®ƒ";
+	private String qn_tag = "å…¶å®ƒ";
 	private String qn_authority = "";
 	private String qn_state = "";
 	private String qn_validity = "";
@@ -20,45 +20,45 @@ public class Dbquestionnaire {
 	private BigDecimal qn_a_count = BigDecimal.valueOf(0);
 	private Timestamp qn_starttime = Timestamp.valueOf("1926-08-17 00:00:01");
 	private Timestamp qn_endtime = Timestamp.valueOf("1926-08-17 00:00:01");
-	
+
 	//no translation
-	
+
 	public String getQn_id() {
 		return qn_id;
 	}
-	
+
 	public void setQn_id(String qn_id) {
 		this.qn_id = qn_id;
 	}
-	
+
 	public String getS_id() {
 		return s_id;
 	}
-	
+
 	public void setS_id(String s_id) {
 		this.s_id = s_id;
 	}
-	
+
 	public String getQn_title() {
 		return qn_title;
 	}
-	
+
 	public void setQn_title(String qn_title) {
 		this.qn_title = qn_title;
 	}
-	
+
 	public String getQn_des() {
 		return qn_des;
 	}
-	
+
 	public void setQn_des(String qn_des) {
 		this.qn_des = qn_des;
 	}
-	
+
 	public String getQn_type() {
 		return qn_type;
 	}
-	
+
 	public void setQn_type(String qn_type) {
 		this.qn_type = qn_type;
 	}
@@ -70,7 +70,7 @@ public class Dbquestionnaire {
 	public void setQn_tag(String qn_tag) {
 		this.qn_tag = qn_tag;
 	}
-	
+
 	public String getQn_authority() {
 		return qn_authority;
 	}
@@ -82,23 +82,23 @@ public class Dbquestionnaire {
 	public String getQn_state() {
 		return qn_state;
 	}
-	
+
 	public void setQn_state(String qn_state) {
 		this.qn_state = qn_state;
 	}
-	
+
 	public String getQn_validity() {
 		return qn_validity;
 	}
-	
+
 	public void setQn_validity(String qn_validity) {
 		this.qn_validity = qn_validity;
 	}
-	
+
 	public BigDecimal getQn_q_count() {
 		return qn_q_count;
 	}
-	
+
 	public void setQn_q_count(BigDecimal qn_q_count) {
 		this.qn_q_count = qn_q_count;
 	}
@@ -126,7 +126,7 @@ public class Dbquestionnaire {
 	public void setQn_a_count(BigDecimal qn_a_count) {
 		this.qn_a_count = qn_a_count;
 	}
-	
+
 	public void setAll(ResultSet rs) throws SQLException{
 		try {
 			this.setQn_id(rs.getString("qn_id"));
@@ -146,44 +146,44 @@ public class Dbquestionnaire {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//translation
 	public String get_transQn_id() {
 		return qn_id;
 	}
-	
+
 	public void set_transQn_id(String qn_id) {
 		this.qn_id = qn_id;
 	}
-	
+
 	public String get_transS_id() {
 		return s_id;
 	}
-	
+
 	public void set_transS_id(String s_id) {
 		this.s_id = s_id;
 	}
-	
+
 	public String get_transQn_title() {
 		return qn_title;
 	}
-	
+
 	public void set_transQn_title(String qn_title) {
 		this.qn_title = qn_title;
 	}
-	
+
 	public String get_transQn_des() {
 		return qn_des;
 	}
-	
+
 	public void set_transQn_des(String qn_des) {
 		this.qn_des = qn_des;
 	}
-	
+
 	public String get_transQn_type() {
 		return qn_type;
 	}
-	
+
 	public void set_transQn_type(String qn_type) {
 		this.qn_type = qn_type;
 	}
@@ -195,25 +195,25 @@ public class Dbquestionnaire {
 	public void set_transQn_tag(String qn_tag) {
 		this.qn_tag = qn_tag;
 	}
-	
+
 	public String get_transQn_authority() {
 		if (qn_authority.equals("pub"))
 		{
-			return "¹«ÓĞ";
+			return "å…¬æœ‰";
 		}
 		else if (qn_authority.equals("pri"))
 		{
-			return "Ë½ÓĞ";
+			return "ç§æœ‰";
 		}
 		return qn_authority;
 	}
 
 	public void set_transQn_authority(String qn_authority) {
-		if (qn_authority.equals("¹«ÓĞ"))
+		if (qn_authority.equals("å…¬æœ‰"))
 		{
 			this.qn_authority = "pub";
 		}
-		else if (qn_authority.equals("Ë½ÓĞ"))
+		else if (qn_authority.equals("ç§æœ‰"))
 		{
 			this.qn_authority = "pri";
 		}
@@ -225,21 +225,21 @@ public class Dbquestionnaire {
 	public String get_transQn_state() {
 		if (qn_state.equals("ing"))
 		{
-			return "½øĞĞÖĞ";
+			return "è¿›è¡Œä¸­";
 		}
 		else if (qn_state.equals("end"))
 		{
-			return "ÒÑ½áÊø";
+			return "å·²ç»“æŸ";
 		}
 		return qn_state;
 	}
-	
+
 	public void set_transQn_state(String qn_state) {
-		if (qn_state.equals("½øĞĞÖĞ"))
+		if (qn_state.equals("è¿›è¡Œä¸­"))
 		{
 			this.qn_state = "ing";
 		}
-		else if (qn_state.equals("ÒÑ½áÊø"))
+		else if (qn_state.equals("å·²ç»“æŸ"))
 		{
 			this.qn_state = "end";
 		}
@@ -247,25 +247,25 @@ public class Dbquestionnaire {
 			this.qn_state = qn_state;
 		}
 	}
-	
+
 	public String get_transQn_validity() {
 		if (qn_validity.equals("P"))
 		{
-			return "ºÏ·¨";
+			return "åˆæ³•";
 		}
 		else if (qn_validity.equals("N"))
 		{
-			return "·Ç·¨";
+			return "éæ³•";
 		}
 		return qn_validity;
 	}
-	
+
 	public void set_transQn_validity(String qn_validity) {
-		if (qn_validity.equals("ºÏ·¨"))
+		if (qn_validity.equals("åˆæ³•"))
 		{
 			this.qn_validity = "P";
 		}
-		else if (qn_validity.equals("·Ç·¨"))
+		else if (qn_validity.equals("éæ³•"))
 		{
 			this.qn_validity = "N";
 		}
@@ -273,11 +273,11 @@ public class Dbquestionnaire {
 			this.qn_validity = qn_validity;
 		}
 	}
-	
+
 	public long get_transQn_q_count() {
 		return qn_q_count.longValue();
 	}
-	
+
 	public void set_transQn_q_count(long qn_q_count) {
 		this.qn_q_count = BigDecimal.valueOf(qn_q_count);
 	}

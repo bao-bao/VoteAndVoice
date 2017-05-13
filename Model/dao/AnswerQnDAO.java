@@ -20,7 +20,7 @@ public class AnswerQnDAO {
 	static public final int EXCEPTION = -1;
 	static public final int SUCCESS = 1;
 	static public final int FAILED = -2;
-	
+
 	public AnswerQnDAO() {
 		try {
 			dbconn = new DatabaseConnection();
@@ -29,7 +29,7 @@ public class AnswerQnDAO {
 		}
 		conn = dbconn.getConnection();
 	}
-	
+
 	public int getQnByQnId(String qn_id, ArrayList<ExDbquestionnaire> exQnList) {
 		int message = FAILED;
 		String sqlQn = "select * from "
@@ -41,14 +41,14 @@ public class AnswerQnDAO {
 				+ "where qn_id=? and q_id=? ";
 		exQnList.clear();
 		try {
-			//根据qn_id取ExQn
+			//鏍规嵁qn_id鍙朎xQn
 			PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
 			pstmtQn.setString(1, qn_id);
 			ResultSet rsQn = pstmtQn.executeQuery();
 			if(rsQn.next()) {
 				ExDbquestionnaire exQn = new ExDbquestionnaire();
 				exQn.setAll(rsQn);
-				//根据qn_id取ExQ
+				//鏍规嵁qn_id鍙朎xQ
 				PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
 				pstmtQ.setString(1, qn_id);
 				ResultSet rsQ = pstmtQ.executeQuery();
@@ -56,7 +56,7 @@ public class AnswerQnDAO {
 					BigDecimal q_id = rsQ.getBigDecimal("q_id");
 					ExDbquestion exQ = new ExDbquestion();
 					exQ.setPart(rsQ);
-					//根据qn_id, q_id取ExI
+					//鏍规嵁qn_id, q_id鍙朎xI
 					PreparedStatement pstmtI = conn.prepareStatement(sqlI);
 					pstmtI.setString(1, qn_id);
 					pstmtI.setBigDecimal(2, q_id);

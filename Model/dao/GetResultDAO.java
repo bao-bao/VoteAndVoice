@@ -20,7 +20,7 @@ public class GetResultDAO {
 	static public final int EXCEPTION = -1;
 	static public final int SUCCESS = 1;
 	static public final int FAILED = -2;
-	
+
 	public GetResultDAO() {
 		try {
 			dbconn = new DatabaseConnection();
@@ -29,7 +29,7 @@ public class GetResultDAO {
 		}
 		conn = dbconn.getConnection();
 	}
-	
+
 	public int getQnResultByQnId(String qn_id, ArrayList<ExDbquestionnaire> exQnList) {
 		int message = FAILED;
 		String sqlQn = "select * from "
@@ -45,14 +45,14 @@ public class GetResultDAO {
 				+ "where qn_id=? and q_id=? and i_id=? ";
 		exQnList.clear();
 		try {
-			//根据qn_id取ExQn
+			//鏍规嵁qn_id鍙朎xQn
 			PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
 			pstmtQn.setString(1, qn_id);
 			ResultSet rsQn = pstmtQn.executeQuery();
 			if(rsQn.next()) {
 				ExDbquestionnaire exQn = new ExDbquestionnaire();
 				exQn.setAll(rsQn);
-				//根据qn_id取ExQ
+				//鏍规嵁qn_id鍙朎xQ
 				PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
 				pstmtQ.setString(1, qn_id);
 				ResultSet rsQ = pstmtQ.executeQuery();
@@ -60,7 +60,7 @@ public class GetResultDAO {
 					BigDecimal q_id = rsQ.getBigDecimal("q_id");
 					ExDbquestion exQ = new ExDbquestion();
 					exQ.setPart(rsQ);
-					//根据qn_id, q_id取ExI
+					//鏍规嵁qn_id, q_id鍙朎xI
 					PreparedStatement pstmtI = conn.prepareStatement(sqlI);
 					pstmtI.setString(1, qn_id);
 					pstmtI.setBigDecimal(2, q_id);
@@ -69,7 +69,7 @@ public class GetResultDAO {
 						BigDecimal i_id = rsI.getBigDecimal("i_id");
 						ExDbitem exI = new ExDbitem();
 						exI.setPart(rsI);
-						//根据qn_id, q_id, i_id取ExA
+						//鏍规嵁qn_id, q_id, i_id鍙朎xA
 						PreparedStatement pstmtAC = conn.prepareStatement(sqlAC);
 						pstmtAC.setString(1, qn_id);
 						pstmtAC.setBigDecimal(2, q_id);
@@ -124,7 +124,7 @@ public class GetResultDAO {
 				+ "where qn_id=? and q_id=? and i_id=? ";
 		exQList.clear();
 		try {
-			//根据qn_id,q_id取ExQ
+			//鏍规嵁qn_id,q_id鍙朎xQ
 			PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
 			pstmtQ.setString(1, qn_id);
 			pstmtQ.setBigDecimal(2, q_id);
@@ -133,7 +133,7 @@ public class GetResultDAO {
 			if(rsQ.next()) {
 				ExDbquestion exQ = new ExDbquestion();
 				exQ.setAll(rsQ);
-				//根据qn_id, q_id取ExI
+				//鏍规嵁qn_id, q_id鍙朎xI
 				PreparedStatement pstmtI = conn.prepareStatement(sqlI);
 				pstmtI.setString(1, qn_id);
 				pstmtI.setBigDecimal(2, q_id);
@@ -142,7 +142,7 @@ public class GetResultDAO {
 					BigDecimal i_id = rsI.getBigDecimal("i_id");
 					ExDbitem exI = new ExDbitem();
 					exI.setPart(rsI);
-					//根据qn_id, q_id, i_id取ExA
+					//鏍规嵁qn_id, q_id, i_id鍙朎xA
 					PreparedStatement pstmtAC = conn.prepareStatement(sqlAC);
 					pstmtAC.setString(1, qn_id);
 					pstmtAC.setBigDecimal(2, q_id);

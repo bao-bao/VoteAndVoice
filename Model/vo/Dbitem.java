@@ -10,45 +10,45 @@ public class Dbitem {
 	private BigDecimal i_id = BigDecimal.valueOf(0);
 	private String i_type = "";
 	private String i_des = "";
-	
+
 	//no translation
-	
+
 	public String getQn_id() {
 		return qn_id;
 	}
-	
+
 	public void setQn_id(String qn_id) {
 		this.qn_id = qn_id;
 	}
-	
+
 	public BigDecimal getQ_id() {
 		return q_id;
 	}
-	
+
 	public void setQ_id(BigDecimal q_id) {
 		this.q_id = q_id;
 	}
-	
+
 	public BigDecimal getI_id() {
 		return i_id;
 	}
-	
+
 	public void setI_id(BigDecimal i_id) {
 		this.i_id = i_id;
 	}
-	
+
 	public String getI_type() {
 		return i_type;
 	}
-	
+
 	public void setI_type(String i_type) {
 		this.i_type = i_type;
 	}
-	
+
 	public String getI_des() {
 		return i_des;
 	}
-	
+
 	public void setI_des(String i_des) {
 		this.i_des = i_des;
 	}
@@ -64,58 +64,58 @@ public class Dbitem {
 			e.printStackTrace();
 		}
 	}
-	
+
 	//translation
 	public String get_transQn_id() {
 		return qn_id;
 	}
-	
+
 	public void set_transQn_id(String qn_id) {
 		this.qn_id = qn_id;
 	}
-	
+
 	public long get_transQ_id() {
 		return q_id.longValue();
 	}
-	
+
 	public void set_transQ_id(long q_id) {
 		this.q_id = BigDecimal.valueOf(q_id);
 	}
-	
+
 	public long get_transI_id() {
 		return i_id.longValue();
 	}
-	
+
 	public void set_transI_id(long i_id) {
 		this.i_id = BigDecimal.valueOf(i_id);
 	}
-	
+
 	public String get_transI_type() {
 		if (i_type.equals("sin"))
 		{
-			return "µ¥Ñ¡";
+			return "å•é€‰";
 		}
 		else if (i_type.equals("mul"))
 		{
-			return "¶àÑ¡";
+			return "å¤šé€‰";
 		}
 		else if (i_type.equals("que"))
 		{
-			return "ÎÊ´ğ";
+			return "é—®ç­”";
 		}
 		return i_type;
 	}
-	
+
 	public void set_transI_type(String i_type) {
-		if (i_type.equals("µ¥Ñ¡"))
+		if (i_type.equals("å•é€‰"))
 		{
 			this.i_type = "sin";
 		}
-		else if (i_type.equals("¶àÑ¡"))
+		else if (i_type.equals("å¤šé€‰"))
 		{
 			this.i_type = "mul";
 		}
-		else if (i_type.equals("ÎÊ´ğ"))
+		else if (i_type.equals("é—®ç­”"))
 		{
 			this.i_type = "que";
 		}
@@ -123,11 +123,11 @@ public class Dbitem {
 			this.i_type = i_type;
 		}
 	}
-	
+
 	public String get_transI_des() {
 		return i_des;
 	}
-	
+
 	public void set_transI_des(String i_des) {
 		this.i_des = i_des;
 	}
