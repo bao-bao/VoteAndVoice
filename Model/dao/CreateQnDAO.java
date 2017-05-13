@@ -548,7 +548,6 @@ public class CreateQnDAO {
 			    message = SUCCESS;
             }
 			dbconn.close();
-			message = SUCCESS;
 		} catch (Exception e) {
 			message = EXCEPTION;
 			e.printStackTrace();

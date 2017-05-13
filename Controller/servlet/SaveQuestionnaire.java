@@ -59,17 +59,8 @@ public class SaveQuestionnaire extends HttpServlet {
         qmap.put("multiple", multiple);
         qmap.put("qanda", qanda);
 
-
         String qnaireString = (JSONObject.fromObject(qmap)).toString();
         questionnaire.set_transQn_delay(qnaireString);
-
-        // TODO:
-//        JSONObject qnaireJSON = JSONObject.fromObject(qnaireString);
-//        JSONObject forder = qnaireJSON.getJSONObject("order");
-//        JSONArray fsingle = qnaireJSON.getJSONArray("single");
-//        JSONArray fmultiple = qnaireJSON.getJSONArray("multiple");
-//        JSONArray fqanda = qnaireJSON.getJSONArray("qanda");
-//
 
         int message = DAOFactory.getCreateQnDAO().saveQnDelay(newExQn);
         switch(message){

@@ -28,7 +28,7 @@
                     <%=savedQuestionnaireList.get(i).get_transS_name() + ' ' + savedQuestionnaireList.get(i).getQuestionnaire().get_transQn_state() %>
                     <%
                         String state = savedQuestionnaireList.get(i).get_transQuestionnaire().get_transQn_state();
-                        if(state.equals("未完成")) {
+                        if(state.equals("未发布")) {
                     %>
 
                     <input type="hidden" name="qn_id" value="<%=savedQuestionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
