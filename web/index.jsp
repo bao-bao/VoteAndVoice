@@ -1,7 +1,7 @@
 <%@ page language="java"  contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"  %>
 <%@page
-	import="vo.*"
+	import="vo.Dbuser" 
 %>
 <%@include file="indexHeader.jsp" %>
 		<section id="intro">

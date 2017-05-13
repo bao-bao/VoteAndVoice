@@ -130,7 +130,7 @@
 		var questionnaire_id = "<%=qn_id%>";
 		var janswer = getJSONAnswer();
 		$.post(
-		'/submit',
+		'/VoteAndVoice/submit',
 		{
 			u_id: user_id,
 			qn_id: questionnaire_id,

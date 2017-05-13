@@ -112,7 +112,7 @@ public class ATest {
 			exQn.getExQuestionList().add(exQ);
 		}
 		//result = DAOFactory.getCreateQnDAO().createQsIs(exQn);
-		
+
 		ArrayList<Dbown> ownList = exQn.getOwnList();//new ArrayList<Dbown>();
 		for(int i = 0; i != 3; i++) {
 			Dbown own = new Dbown();

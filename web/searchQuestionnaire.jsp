@@ -30,7 +30,7 @@ Dbuser user = (Dbuser)session.getAttribute("loginUser");
 <script src="script/main.js"></script>
 <script>
 function login_btn() {
-	$.post('/LoginServlet',
+	$.post('/VoteAndVoice/LoginServlet',
 	{
 		login_name : $("#login_name").val(),
 		login_pw : $("#login_pw").val()
@@ -78,7 +78,7 @@ function register_btn(){
 		return;
 	}	
 	$.post(
-			'/RegisterServlet',
+			'/VoteAndVoice/RegisterServlet',
 			{
 				register_name: $('#register_name').val(),
 				register_pw: $('#register_pw').val(),
@@ -120,7 +120,7 @@ function register_btn(){
 							<ul class="nav text-center">
 								<li class="active"><a href="index.jsp"><span>主页</span></a></li>
 								<li><a href="fill.jsp">填问卷</a></li>
-								<li><a href="/CreateQuestionnaire_type">建问卷</a></li>
+								<li><a href="/VoteAndVoice/CreateQuestionnaire_type">建问卷</a></li>
 								<li><a href="searchQuestionnaire.jsp">搜问卷</a></li>
 							</ul>
 						</div>
@@ -133,7 +133,7 @@ function register_btn(){
 										class="glyphicon glyphicon-user">登陆</span></a></li>
 										<%}else{ %>
 										 <li>
-										 <a href="/BasicInfo">
+										 <a href="/VoteAndVoice/BasicInfo">
                                 <img src="images/1.jpg" class="img-rounded user-profile"  alt="avatar" width="40" height="40" />
                                 <span class="user-name"><%=user.get_transU_id() %></span>
                                 </a>
