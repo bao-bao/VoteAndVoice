@@ -544,6 +544,9 @@ public class CreateQnDAO {
 			pstmtQn.setString(9,"dly");
 			pstmtQn.setString(10,qn.getQn_delay());
 			int i = pstmtQn.executeUpdate();
+			if(i > 0) {
+			    message = SUCCESS;
+            }
 			dbconn.close();
 		} catch (Exception e) {
 			message = EXCEPTION;
