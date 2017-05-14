@@ -67,10 +67,10 @@
     </div>
 </div>
 <script>
-	var order = "<%=order%>";
-	var single = "<%=single%>";
-	var multiple = "<%=multiple%>";
-	var qanda = "<%=qanda%>";
+	var order = "<%=order %>";
+	var single = "<%=single.replaceAll("\"","\'") %>";
+	var multiple = "<%=multiple.replaceAll("\"","\'") %>";
+	var qanda = "<%=qanda.replaceAll("\"","\'") %>";
 	processQnaire(order, single, multiple, qanda);
 
 </script>

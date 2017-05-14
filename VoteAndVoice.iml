@@ -31,6 +31,6 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.0.M11" level="application_server_libraries" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.0.M21" level="application_server_libraries" />
   </component>
 </module>
