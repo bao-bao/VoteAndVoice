@@ -848,7 +848,6 @@ function onClickPreview(){
 	
 	window.open("/VoteAndVoice/previewQuestionnaire.jsp");
 }
-
 function onClickSave(){
     var title = document.getElementsByClassName("qnaire-main-title")[0];
     title = title.innerText;
@@ -912,16 +911,16 @@ function onClickSave(){
     console.log(jsingle)///
     console.log(jmultiple)///
     console.log(jqanda)///
-    addCookie('title', title, 1);
-    addCookie('des', des, 1);
-    addCookie('order', jorder, 1);
-    addCookie('single', jsingle, 1);
-    addCookie('multiple', jmultiple, 1);
-    addCookie('qanda', jqanda, 1);
+    addLocalStorage('title', title);
+    addLocalStorage('des', des);
+    addLocalStorage('order', jorder);
+    addLocalStorage('single', jsingle);
+    addLocalStorage('multiple', jmultiple);
+    addLocalStorage('qanda', jqanda);
 
-    window.alert("保存成功");
-    window.location.href="/VoteAndVoice/SaveQuestionnaire";
+    window.open("/VoteAndVoice/previewSavedQuestionnaire.jsp");
 }
+
 function processQnaire(order, single, multiple, qanda){
 	var jorder = eval('(' + order + ')' );
 	var jsingle = eval( '(' + single + ')' );
@@ -1130,10 +1129,205 @@ addLoadEvent(prepareSearchQuestion);
 
 
 
+/**************************This is for the reconstruct page *********************/
+function reprocessQnaire(order, single, multiple, qanda){
+    var jorder = eval('(' + order + ')' );
+    var jsingle = eval( '(' + single + ')' );
+    var jmultiple =  eval( '(' + multiple + ')' );
+    var jqanda = eval( '(' + qanda + ')' );
+    console.log(order);///
+    console.log(single);///
+    console.log(multiple);///
+    console.log(qanda);///
+    var isingle = 0;
+    var imultiple = 0;
+    var iqanda = 0;
+
+    for(var i = 0; i < jorder.order.length; ++ i){
+        switch(jorder.order[i]){
+            case 'single':{
+                var question = jsingle.single[isingle ++];
+                reonClickSingle_Mulitple(question, true, i + 1);
+                break;
+            }
+            case 'multiple':{
+                var question = jmultiple.multiple[imultiple ++];
+                reonClickSingle_Mulitple(question, false, i + 1);
+                break;
+            }
+            case 'qanda':{
+                var question = jqanda.qanda[iqanda ++];
+                reonClickQandA(question, i + 1);
+                break;
+            }
+        }
+    }
+}
+
+function reonClickSingle_Mulitple(question, is_single, num){
+    var questionnaire = document.getElementById("questionnaire");
+    if(questionnaire == null) return;
+
+    var out = document.createElement("div");
+    if(is_single == true) {
+        out.setAttribute("class", "qnaire-out qnaire-single-question");
+    }
+    else{
+        out.setAttribute("class", "qnaire-out qnaire-multiple-question");
+    }
+    var inside = document.createElement("div");
+    inside.setAttribute("class", "qnaire-out-inside");
+
+    var order = document.createElement("span");
+    order.setAttribute("class", "qorder");
+    order.appendChild(document.createTextNode(num));
+
+    var title = document.createElement("div");
+    title.setAttribute("contenteditable", "true");
+    title.setAttribute("class", "qnaire qnaire-title");
+    title.appendChild(document.createTextNode(question[0]));
+
+    inside.appendChild(order);
+    inside.appendChild(title);
+    out.appendChild(inside);
+
+    for (var i = 1; i < question.length; ++ i){
+        var errortipe = document.createElement("div");
+        errortipe.setAttribute("class", "error-tips");
+        out.appendChild(errortipe);
+        var matrix = document.createElement("div");
+        matrix.setAttribute("class", "qnaire-out-inside");
+        var input = document.createElement("input");
+        if (is_single == true){
+            input.setAttribute("type", "radio");
+            input.setAttribute("name", "radio");
+        }
+        else{
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("name", "checkbox");
+        }
+        var micontent = document.createElement("div");
+        micontent.setAttribute("contenteditable", "true");
+        micontent.setAttribute("class", "qnaire qnaire-option");
+        micontent.appendChild(document.createTextNode(question[i]));
+        matrix.appendChild(input);
+        matrix.appendChild(micontent);
+        out.appendChild(matrix);
+    }
+
+    var add = document.createElement("div");
+    add.setAttribute("class", "add");
+    var sign = document.createElement("span");
+    if(is_single == true) {
+        sign.onclick = function () {
+            addOption(this, true);
+        };
+    }
+    else{
+        sign.onclick = function () {
+            addOption(this, false);
+        };
+    }
+    add.appendChild(sign);
+    out.appendChild(add);
+
+    var operate = document.createElement("div");
+    operate.setAttribute("class", "operate");
+    var unorder = document.createElement("ul");
+    var li_list = [];
+    for(var i = 0; i < 5; ++ i){
+        li_list[i] = document.createElement("li");
+        unorder.appendChild(li_list[i]);
+    }
+    li_list[0].setAttribute("class", "question-up");
+    li_list[0].setAttribute("title", "上移题目");
+
+    li_list[1].setAttribute("class", "question-down");
+    li_list[1].setAttribute("title", "下移题目");
+
+    li_list[2].setAttribute("class", "set-logic");
+    li_list[2].setAttribute("title", "逻辑设置");
+
+    li_list[3].setAttribute("class", "question-copy");
+    li_list[3].setAttribute("title", "复制");
+
+    li_list[4].setAttribute("class", "question-delete");
+    li_list[4].setAttribute("title", "删除");
+    bindHandle(li_list);
+    operate.appendChild(unorder);
+    out.appendChild(operate);
+
+    questionnaire.appendChild(out);
+    sign.onclick();
+    sign.onclick();
+}
 
 
 
+function reonClickQandA(question, num){
+    var questionnaire = document.getElementById("questionnaire");
+    if(questionnaire == null) return;
 
+    var out = document.createElement("div");
+    out.setAttribute("class", "qnaire-out qnaire-qanda-question");
+
+    var inside = document.createElement("div");
+    inside.setAttribute("class", "qnaire-out-inside");
+
+    var order = document.createElement("span");
+    order.setAttribute("class", "qorder");
+    order.appendChild(document.createTextNode(num));
+
+    var title = document.createElement("div");
+    title.setAttribute("contenteditable", "true");
+    title.setAttribute("class", "qnaire qnaire-title");
+    title.appendChild(document.createTextNode(question[0]));
+
+    var content = document.createElement("div");
+    content.setAttribute("class", "qnaire-out-inside");
+    var content_inside = document.createElement("div");
+    content_inside.setAttribute("class", "qnaire qnaire-content");
+    content_inside.setAttribute("contenteditable", "true");
+    content.appendChild(content_inside);
+
+    var add = document.createElement("div");
+    add.setAttribute("class", "pse-add");
+    var sign = document.createElement("span");
+
+    var operate = document.createElement("div");
+    operate.setAttribute("class", "operate");
+    var unorder = document.createElement("ul");
+    var li_list = [];
+    for(var i = 0; i < 5; ++ i){
+        li_list[i] = document.createElement("li");
+        unorder.appendChild(li_list[i]);
+    }
+    li_list[0].setAttribute("class", "question-up");
+    li_list[0].setAttribute("title", "上移题目");
+
+    li_list[1].setAttribute("class", "question-down");
+    li_list[1].setAttribute("title", "下移题目");
+
+    li_list[2].setAttribute("class", "set-logic");
+    li_list[2].setAttribute("title", "逻辑设置");
+
+    li_list[3].setAttribute("class", "question-copy");
+    li_list[3].setAttribute("title", "复制");
+
+    li_list[4].setAttribute("class", "question-delete");
+    li_list[4].setAttribute("title", "删除");
+    bindHandle(li_list);
+
+    operate.appendChild(unorder);
+    add.appendChild(sign);
+    inside.appendChild(order);
+    inside.appendChild(title);
+    out.appendChild(inside);
+    out.appendChild(content);
+    out.appendChild(add);
+    out.appendChild(operate);
+    questionnaire.appendChild(out);
+}
 
 
 
