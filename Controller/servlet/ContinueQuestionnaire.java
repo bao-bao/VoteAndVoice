@@ -30,7 +30,7 @@ public class ContinueQuestionnaire extends HttpServlet {
                 message = DAOFactory.getCreateQnDAO().deleteQnDelayByQnId(qn_id);
                 switch (message) {
                     case CreateQnDAO.SUCCESS:
-                        request.getRequestDispatcher("/savedQuestionnaire.jsp").forward(request, response);
+                        response.sendRedirect("/VoteAndVoice/SavedQuestionnaire");
                         break;
                     case CreateQnDAO.EXCEPTION:
                         response.getWriter().append("somthing wrong with our website");

@@ -649,4 +649,34 @@ public class CreateQnDAO {
 	public int getDelayExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
 		return getDelayExQuestionnairesByUId(s_id, exQuestionnaireList, DEFAULT_LIMIT);
 	}
+
+	public int getTemplatesByQnType(String qn_type, String adm_id, ArrayList<ExDbquestionnaire> exQnList){
+		int message = FAILED;
+		String sqlQn = "select * from db_16.questionnaire where s_id=? and (qn_type=? or qn_type='其他') ";
+		exQnList.clear();
+		try {
+			PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
+			pstmtQn.setString(1, adm_id);
+			pstmtQn.setString(2, qn_type);
+			ResultSet rsQn = pstmtQn.executeQuery();
+			while(rsQn.next()) {
+				ExDbquestionnaire exQn = new ExDbquestionnaire();
+				exQn.getQuestionnaire().setAll(rsQn);
+				exQnList.add(exQn);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
 }

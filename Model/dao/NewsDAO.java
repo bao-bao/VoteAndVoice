@@ -369,4 +369,56 @@ public class NewsDAO {
 	public int getFedExAnswersByUId(String following_u_id, ArrayList<ExDbanswer> exAnswerList) {
 		return getFedExAnswersByUId(following_u_id, exAnswerList, DEFAULT_LIMIT);
 	}
+
+	public int getOwnExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * from "
+				+ "(select * from db_16.questionnaire where s_id=? and qn_state!='dly') questionnaire "
+				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
+				+ "order by qn_starttime desc ";
+		String sqlOwn = "select * from "
+				+ "(select * from db_16.questionnaire where qn_id in (select qn_id from db_16.own where u_id=?) and qn_state!='dly') questionnaire "
+				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
+				+ "order by qn_starttime desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+			sqlOwn += "limit " + Integer.toString(limit) + " ";
+		}
+		exQuestionnaireList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
+				exQuestionnaire.setAll(rs);
+				exQuestionnaireList.add(exQuestionnaire);
+			}
+			PreparedStatement pstmtOwn = conn.prepareStatement(sqlOwn);
+			pstmtOwn.setString(1, s_id);
+			ResultSet rsOwn = pstmtOwn.executeQuery();
+			while(rsOwn.next()) {
+				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
+				exQuestionnaire.setAll(rsOwn);
+				exQuestionnaireList.add(exQuestionnaire);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getOwnExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
+		return getOwnExQuestionnairesByUId(s_id, exQuestionnaireList, DEFAULT_LIMIT);
+	}
+
 }

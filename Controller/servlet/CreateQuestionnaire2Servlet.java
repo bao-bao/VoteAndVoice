@@ -49,7 +49,7 @@ public class CreateQuestionnaire2Servlet extends HttpServlet {
 				session.setAttribute("newExQn", newExQn);
 				//System.out.println(newExQn.getQuestionnaire().getQn_authority());
 				//session.setAttribute("createQnStage", 4);
-				request.getRequestDispatcher("creatingQuestionnaire5.jsp").forward(request, response);
+				response.sendRedirect("CreateQuestionnaire_templates");
 			}
 			else {
 				response.sendRedirect("CreateQuestionnaire_authority");

@@ -74,27 +74,28 @@ public class MyFriend extends HttpServlet {
 		else
 		{
 			HttpSession session = request.getSession(true);
-			String u_id = (String)session.getAttribute("u_id");
-			if (u_id == null)
+			Dbuser user = (Dbuser)session.getAttribute("loginUser");
+			if (user == null)
 			{
-				//u_id = "zhz123";
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 				return;
 			}
+			String u_id  = user.getU_id();
 			System.out.println(u_id + ' ' + del_fing_id);
 			int message = DAOFactory.getFollowDAO().unfollow(u_id, del_fing_id);
-			switch(message) {
-			case FollowDAO.SUCCESS:
-				break;
-			case FollowDAO.FAILED:
-				System.out.println("failed");
-				break;
-			case FollowDAO.EXCEPTION:
-				System.out.println("exception");
-				break;
-			default:
-				break;
-			}
+			System.out.println(message);
+//			switch(message) {
+//			case FollowDAO.SUCCESS:
+//				break;
+//			case FollowDAO.FAILED:
+//				System.out.println("failed");
+//				break;
+//			case FollowDAO.EXCEPTION:
+//				System.out.println("exception");
+//				break;
+//			default:
+//				break;
+//			}
 		}
 		doGet(request, response);
 	}

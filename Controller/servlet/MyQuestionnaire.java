@@ -45,7 +45,7 @@ public class MyQuestionnaire extends HttpServlet {
 			return;/////
 		}
 		ArrayList<ExDbquestionnaire> myQustionnaireList = new ArrayList<ExDbquestionnaire>();			
-		int message = DAOFactory.getNewsDAO().getExQuestionnairesByUId(u_id, myQustionnaireList);
+		int message = DAOFactory.getNewsDAO().getOwnExQuestionnairesByUId(u_id, myQustionnaireList);
 		switch(message) {
 		case FollowDAO.SUCCESS:
 			System.out.println("id");

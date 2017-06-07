@@ -1127,8 +1127,6 @@ function prepareSearchQuestion(){
 addLoadEvent(prepareSearchQuestion);
 
 
-
-
 /**************************This is for the reconstruct page *********************/
 function reprocessQnaire(order, single, multiple, qanda){
     var jorder = eval('(' + order + ')' );
@@ -1258,8 +1256,8 @@ function reonClickSingle_Mulitple(question, is_single, num){
     out.appendChild(operate);
 
     questionnaire.appendChild(out);
-    sign.onclick();
-    sign.onclick();
+    //sign.onclick();
+    //sign.onclick();
 }
 
 
@@ -1328,6 +1326,4 @@ function reonClickQandA(question, num){
     out.appendChild(operate);
     questionnaire.appendChild(out);
 }
-
-
 

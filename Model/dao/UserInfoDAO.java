@@ -60,7 +60,7 @@ public class UserInfoDAO {
 		}
 		return message;
 	}
-	
+
 	public int getUserInfoByName(String u_name, ArrayList<Dbuser> userList, int totalCount) {
 		int message = SUCCESS;
 		String sql = "select * "
@@ -70,6 +70,43 @@ public class UserInfoDAO {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + u_name + "%");
+			ResultSet rs = pstmt.executeQuery();
+			for(int i = 0; rs.next() && i != totalCount; i++) {
+				Dbuser user = new Dbuser();
+				user.setAll(rs);
+				userList.add(user);
+				message = SUCCESS;
+			}
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+
+	public int getUserInfoByNameOrId(String u_name, String login_id, ArrayList<Dbuser> userList, int totalCount) {
+		int message = SUCCESS;
+		userList.clear();
+		if(u_name == null || login_id == null){
+			return message;
+		}
+		String sql = "select * "
+				+ "from db_16.user "
+				+ "where (u_name like ?  or u_id like ?) and u_id != ? and u_id not in (select followed_u_id from db_16.follow where following_u_id = ?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + u_name + "%");
+			pstmt.setString(2, "%" + u_name + "%");
+			pstmt.setString(3, login_id);
+			pstmt.setString(4, login_id);
 			ResultSet rs = pstmt.executeQuery();
 			for(int i = 0; rs.next() && i != totalCount; i++) {
 				Dbuser user = new Dbuser();

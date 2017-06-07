@@ -34,10 +34,16 @@ public class searchUserServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
+		HttpSession session = request.getSession(true);
+		Dbuser loginUser = (Dbuser) session.getAttribute("loginUser");
+		if(loginUser == null) {
+			response.sendRedirect("index.jsp");
+			return;
+		}
+    	String name = request.getParameter("name");
         System.out.println(name);
         ArrayList<Dbuser> UserList = new ArrayList<Dbuser>();
-        int message = DAOFactory.getUserInfoDAO().getUserInfoByName(name, UserList, 30);
+        int message = DAOFactory.getUserInfoDAO().getUserInfoByNameOrId(name, loginUser.getU_id(), UserList, 30);
         switch (message) {
             case UserInfoDAO.EXCEPTION:
                 response.getWriter().append("MYSQL fault.");

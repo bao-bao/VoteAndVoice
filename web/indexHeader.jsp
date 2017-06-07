@@ -63,6 +63,11 @@ function(data) {
 }
 
 function register_btn(){
+    if($('#register_name').val().length < 5){
+        $('#register_errorMessage').text("*用户名长度必须超过五个字符");
+        $('#register_name').focus();
+        return;
+	}
 	if($('#register_pw').val() != $('#register_pw_confirm').val()) {
 		$('#register_errorMessage').text("*两次密码输入不匹配，请重新输入");
 		$('#register_pw_confirm').val("");

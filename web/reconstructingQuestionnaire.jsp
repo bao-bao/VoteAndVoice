@@ -47,6 +47,7 @@
                         <%=des %>
                     </div>
                 </div>
+                <div class="error-tips"></div>
 
             </div>
 

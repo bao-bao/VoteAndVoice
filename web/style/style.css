@@ -516,45 +516,10 @@ div.modal-content h4{
     margin-right: 10%;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.template-form-row form{
+  padding-top: 5px;
+  border-top: 1px dashed #eeeeee;
+}
+.template-form-row label{
+  padding: 0;
+}

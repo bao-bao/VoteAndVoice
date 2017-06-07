@@ -32,9 +32,9 @@
                     %>
 
                     <input type="hidden" name="qn_id" value="<%=savedQuestionnaireList.get(i).getQuestionnaire().getQn_id() %>" />
-                    <input type="hidden" name="btntype" id="btntype" value="" />
-                    <button type="submit" class="btn btn-success btn-lg" onclick="document.getElementById('btntype').value=0">继续编辑</button>
-                    <button type="submit" class="btn btn-danger btn-lg" onclick="document.getElementById('btntype').value=1">删除</button>
+                    <input type="hidden" name="btntype" id="btntype<%=i%>" value="" />
+                    <button type="submit" class="btn btn-success btn-lg" onclick="document.getElementById('btntype<%=i%>').value=0">继续编辑</button>
+                    <button type="submit" class="btn btn-danger btn-lg" onclick="document.getElementById('btntype<%=i%>').value=1">删除</button>
 
                     <%
                         }

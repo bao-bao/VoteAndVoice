@@ -26,7 +26,7 @@
                             %>
                         	<form action="<%=response.encodeURL("searchUser") %>" method="post">
                             	<li class="list-group-item">
-                                	<%=suser.get_transU_name() %>
+                                	<%=suser.get_transU_name() %>#<%=suser.get_transU_id() %>
                                 	<input type="hidden" name="add_fed_id" value="<%=suser.get_transU_id() %>"/>
                                 	<button type="submit" aria-hidden="true" class="close"><span class="glyphicon glyphicon-plus"></span>FOLLOW</button>
                             	</li>

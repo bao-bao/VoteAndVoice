@@ -58,7 +58,7 @@ public class CreateQuestionnaire4Servlet extends HttpServlet {
 			System.out.println(newExQn.get_transQuestionnaire().get_transQn_authority());
 			System.out.println(newExQn.get_transQn_cost());
 			System.out.println(newExQn.get_transOwnList().size());
-			request.getRequestDispatcher("creatingQuestionnaire5.jsp").forward(request, response);
+			response.sendRedirect("CreateQuestionnaire_templates");
 		}
 		else {
 			response.sendRedirect("CreateQuestionnaire_type");
