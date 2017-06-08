@@ -32,7 +32,7 @@
                         问答题
                     </li>
                 </ul>
-                <button class="btn btn-default" id="preview" onclick="onClickPreview()">预览</button>
+                <button class="btn btn-default" id="preview" onclick="onClickPreview()">发布</button>
                 <button class="btn btn-default" id="save" onclick="onClickSave()">保存</button>
             </div>
             <div class="col-md-8" id="questionnaire">

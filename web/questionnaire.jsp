@@ -23,10 +23,26 @@
     <script>
         var u_id = '<%=u_id%>';
         var qn_id = '<%=qn_id%>';
+        var url = document.URL;
+        url = url.replace(/Genquestionnaire/, "AnswerByQnId?qn_id=" + qn_id);
         var jiathis_config = {
-            url: "u_id=" + u_id + "&qn_id=" + qn_id,
+            url: url,
             title: "问卷分享",
             summary: "分享问卷，让大家一起来填"
+        }
+
+        var copyInnerHTML = function (e) {
+            var text = e.getAttribute("value");
+            var clipboardData = window.clipboardData;
+            if(clipboardData){
+                window.clipboardData.setData("Text", text);
+                alert("已将网址复制到剪贴板");
+            }
+            else{
+                e.select();
+                document.execCommand("Copy");
+                alert("已将网址复制到剪贴板");
+            }
         }
     </script>
 
@@ -38,8 +54,12 @@
     <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
        target="_blank">更多</a>
     <a class="jiathis_counter_style"></a>
+    <input type="text" id="urltoshow" onclick="copyInnerHTML(this);" style="font-size: small;" readonly />
 </div>
-
+<script>
+    document.getElementById("urltoshow").setAttribute("value", url);
+    document.getElementById("urltoshow").setAttribute("style", "font-size: small; width:"+url.length*8+"px");
+</script>
 <!-- 问卷框架 -->
 <div class="wjContent clear" id="survey_page">
     <!-- 问卷标题 -->

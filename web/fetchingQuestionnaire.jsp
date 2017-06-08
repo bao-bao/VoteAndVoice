@@ -189,7 +189,7 @@
         is_submit = true;
         localStorage.clear();
         $.post(
-            '/submit',
+            '/VoteAndVoice/submit',
             {
                 u_id: user_id,
                 qn_id: questionnaire_id,
