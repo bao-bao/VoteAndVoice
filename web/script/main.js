@@ -335,7 +335,7 @@ function onClickType(btn) {
         btn.style.backgroundColor = "#f0735a";
         //增添标签
         var question = document.getElementById("type-title");
-        txtNode = document.createTextNode(btn.innerText);
+        txtNode = document.createTextNode(btn.innerText.split('*')[0]);
         question.appendChild(txtNode);
 
         tagdiv = document.createElement("form");
@@ -344,7 +344,8 @@ function onClickType(btn) {
         var type = document.createElement("input");///
         type.setAttribute("type", "hidden");///
         type.setAttribute("name", "type");///
-        type.setAttribute("value", btn.innerText);///
+        console.log( btn.innerText.split('*'));
+        type.setAttribute("value", btn.innerText.split('*')[0]);///
         var tag = document.createElement("input");
         tag.setAttribute("placeholder", "为您的问卷添加一个tag，说明其内容吧^_^");
         tag.setAttribute("class", "tag");
@@ -1259,8 +1260,6 @@ function reonClickSingle_Mulitple(question, is_single, num){
     //sign.onclick();
     //sign.onclick();
 }
-
-
 
 function reonClickQandA(question, num){
     var questionnaire = document.getElementById("questionnaire");

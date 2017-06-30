@@ -24,7 +24,7 @@
                         {%>
                         	<form action="<%=response.encodeURL("IFollow") %>" method="post">
                             <li class="list-group-item">
-                                <%=followingList.get(i).get_transU_name() %>
+                                <%=followingList.get(i).get_transU_name() %>#<%=followingList.get(i).get_transU_id()%>
                                 <input type="hidden" name="del_fing_id" value="<%=followingList.get(i).get_transU_id() %>"/>
                                 <button type="submit" aria-hidden="true" class="close">&times;UNFOLLOW</button>
                             </li>

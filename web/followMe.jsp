@@ -24,7 +24,7 @@
                         {%>
                         	<form action="<%=response.encodeURL("FollowMe") %>" method="post">
                             <li class="list-group-item">
-                                <%=followedList.get(i).get_transU_name() %>
+                                <%=followedList.get(i).get_transU_name() %>#<%=followedList.get(i).get_transU_id() %>
                                 <input type="hidden" name="add_fed_id" value="<%=followedList.get(i).get_transU_id() %>"/>
                                 <button type="submit" aria-hidden="true" class="close"><span class="glyphicon glyphicon-plus"></span>FOLLOW</button>
                             </li>

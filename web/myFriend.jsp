@@ -24,7 +24,7 @@
                         {%>
                         	<form action="<%=response.encodeURL("MyFriend") %>" method="post">
                             <li class="list-group-item">
-                                <%=friendList.get(i).get_transU_name() %>
+                                <%=friendList.get(i).get_transU_name() %>#<%=friendList.get(i).get_transU_id() %>
                                 <input type="hidden" name="del_fing_id" value="<%=friendList.get(i).get_transU_id() %>"/>
                                 <button type="submit" aria-hidden="true" class="close">&times;UNFOLLOW</button>
                             </li>

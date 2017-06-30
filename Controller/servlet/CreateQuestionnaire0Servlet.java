@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DAOFactory;
 import vo.Dbuser;
 import vo.ExDbquestionnaire;
 
@@ -43,10 +45,18 @@ public class CreateQuestionnaire0Servlet extends HttpServlet {
 			ExDbquestionnaire newExQn = new ExDbquestionnaire();
 			newExQn.get_transQuestionnaire().set_transS_id(u_id);
 			session.setAttribute("newExQn", newExQn);
+			ArrayList<String> typeList = new ArrayList<String>();
+			int message = DAOFactory.getCreateQnDAO().getQnTypesNums("guest0000", typeList);
+			if(message<0){
+				response.sendRedirect("index.jsp");
+				return;
+			}
+			session.setAttribute("typeList", typeList);
 			request.getRequestDispatcher("creatingQuestionnaire1.jsp").forward(request, response);
 		}
 		else {
-			
+			response.sendRedirect("index.jsp");
+			return;
 		}
 		 
 	}

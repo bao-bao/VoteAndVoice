@@ -85,10 +85,15 @@
 	<title></title>
 	<link rel="stylesheet" href="style/answer.css">
 	<script src="script/jquery.min.js"></script>
-	<script src="script/main.js"></script>
 </head>
 <script>
-    var is_submit = false;
+	console.log(window.screen.width);
+
+
+    if(window.screen.width<900){
+        document.getElementsByTagName("head")[0].innerHTML+='<style>.wjContent{font-size\:32px;}.WJButton{font-size:24px;}.title{font-size: 36px;}.wjintro,.wjintro{font-size:36px;}.wjtitle h1{font-size:36px;}body,input,button,select,textarea,th,td{font-size:32px;}.option{width:24px;height:24px;}</style>'
+    }
+	var is_submit = false;
     var user_id = "<%=u_id%>";
     var questionnaire_id = "<%=qn_id%>";
 
@@ -197,7 +202,7 @@
             },
             function(data){
                 var jobj = eval('(' + data + ')');
-                alert(jobj.errorMessage);
+                //alert(jobj.errorMessage);
                 if(jobj.errorMessage == "success"){
                     if (confirm("提交成功关闭本页")){
                         window.opener=null;
@@ -251,6 +256,125 @@
 	</div>
 </div>
 <script>
+    function processQnaire(order, single, multiple, qanda){
+        var jorder = eval('(' + order + ')' );
+        var jsingle = eval( '(' + single + ')' );
+        var jmultiple =  eval( '(' + multiple + ')' );
+        var jqanda = eval( '(' + qanda + ')' );
+        console.log(order)///
+        console.log(single)///
+        console.log(multiple)///
+        console.log(qanda)///
+        var isingle = 0;
+        var imultiple = 0;
+        var iqanda = 0;
+
+        for(var i = 0; i < jorder.order.length; ++ i){
+            switch(jorder.order[i]){
+                case 'single':{
+                    var question = jsingle.single[isingle ++];
+                    addSingle(question, i + 1);
+                    break;
+                }
+                case 'multiple':{
+                    var question = jmultiple.multiple[imultiple ++];
+                    addMultiple(question, i + 1);
+                    break;
+                }
+                case 'qanda':{
+                    var question = jqanda.qanda[iqanda ++];
+                    addQandA(question, i + 1);
+                    break;
+                }
+            }
+        }
+    }
+    //增加单选题
+    function addSingle(question, num){
+        addSingleOrMultiple(question, num, "1");
+    }
+    //增加多选题
+    function addMultiple(question, num){
+        addSingleOrMultiple(question, num, "2");
+    }
+    function addSingleOrMultiple(question, num, type){
+        var root = document.createElement("div");
+        root.setAttribute("class", "wjques maxtop question jqtransformdone");
+        root.setAttribute("questiontype", type);
+
+        var title = document.createElement("div");
+        title.setAttribute("class", "title");
+
+        var qorder = document.createElement("span");
+        qorder.setAttribute("class", "qorder");
+        qorder.appendChild(document.createTextNode(num + " "));
+
+        title.appendChild(qorder);
+        title.appendChild(document.createTextNode(question[0]));
+
+        root.appendChild(title);
+
+        var matrix = document.createElement("div");
+        matrix.setAttribute("class","matrix");
+
+        for(var i  = 1; i < question.length; ++ i){
+            var checkbox = document.createElement("div");
+            checkbox.setAttribute("class", "icheck_box");
+
+            var wrapper = document.createElement("span");
+            wrapper.setAttribute("class", "jqTransformRadioWrapper");
+
+            var input =  document.createElement("input");
+            if(type == "1"){
+                input.setAttribute("type", "radio");
+                var name = "typename" + num;
+                input.setAttribute("name", name);
+            }
+            else if(type == "2") input.setAttribute('type', "checkbox");
+            input.setAttribute("class", "option jqTransformHidden");
+
+            wrapper.appendChild(input);
+            wrapper.appendChild(document.createTextNode(" " + question[i]));
+
+            checkbox.appendChild(wrapper);
+            matrix.appendChild(checkbox);
+        }
+        root.appendChild(matrix);
+        document.getElementById("question_box").appendChild(root);
+    }
+
+    //增加问答题
+    function addQandA(question, num){
+        var root = document.createElement("div");
+        root.setAttribute("class", "wjques maxtop question jqtransformdone");
+        root.setAttribute("questiontype", "3");
+
+        var title = document.createElement("div");
+        title.setAttribute("class", "title");
+
+        var qorder = document.createElement("span");
+        qorder.setAttribute("class", "qorder");
+        qorder.appendChild(document.createTextNode(num + " "));
+
+        title.appendChild(qorder);
+        title.appendChild(document.createTextNode(question[0]));
+
+        root.appendChild(title);
+
+        var matrix = document.createElement("div");
+        matrix.setAttribute("class", "matrix");
+
+        var textarea = document.createElement("textarea");
+        textarea.setAttribute("class", "blankoption");
+        textarea.setAttribute("cols", "40");
+        textarea.setAttribute("rows", "5");
+
+        matrix.appendChild(textarea);
+
+        root.appendChild(matrix);
+        document.getElementById("question_box").appendChild(root);
+    }
+
     var order = "<%=order%>";
     var single = "<%=single%>";
     var multiple = "<%=multiple%>";

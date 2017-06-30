@@ -23,8 +23,10 @@
     <script>
         var u_id = '<%=u_id%>';
         var qn_id = '<%=qn_id%>';
-        var url = document.URL;
-        url = url.replace(/Genquestionnaire/, "AnswerByQnId?qn_id=" + qn_id);
+        var urlPrefix = window.location.href;
+        var parts = urlPrefix.split("//");
+        urlPrefix = parts[0] + "//" + parts[1].split("/")[0] + "/VoteAndVoice/AnswerByQnId?qn_id=";
+        url = urlPrefix + qn_id;
         var jiathis_config = {
             url: url,
             title: "问卷分享",

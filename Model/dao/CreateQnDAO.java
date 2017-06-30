@@ -610,6 +610,47 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
+	public int deleteQnByQnId(String QnId) {
+		int message = FAILED;
+		String sqlA = "delete from db_16.answer where qn_id=?";
+		String sqlI = "delete from db_16.item where qn_id=?";
+		String sqlQ = "delete from db_16.question where qn_id=?";
+		String sqlO = "delete from db_16.own where qn_id=?";
+		String sqlQn = "delete from db_16.questionnaire where qn_id=? ";
+		try {
+			PreparedStatement pstmtA = conn.prepareStatement(sqlA);
+			pstmtA.setString(1, QnId);
+			pstmtA.executeUpdate();
+			PreparedStatement pstmtI = conn.prepareStatement(sqlI);
+			pstmtI.setString(1, QnId);
+			pstmtI.executeUpdate();
+			PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
+			pstmtQ.setString(1, QnId);
+			pstmtQ.executeUpdate();
+			PreparedStatement pstmtO = conn.prepareStatement(sqlO);
+			pstmtO.setString(1, QnId);
+			pstmtO.executeUpdate();
+			PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
+			pstmtQn.setString(1, QnId);
+			int i = pstmtQn.executeUpdate();
+			if(i > 0) {
+				message = SUCCESS;
+			}
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+
 	//用于列出所有的草稿
 	public int getDelayExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
 		int message = EXCEPTION;
@@ -679,4 +720,52 @@ public class CreateQnDAO {
 		}
 		return message;
 	}
+
+    public int getQnTypesNums(String adm_id, ArrayList<String> result){
+	    class Pair{
+	        public String type;
+	        public int num;
+	        public Pair(String p, int n){
+                type = p;
+                num = n;
+            }
+        }
+        ArrayList<Pair> pairs = new ArrayList<Pair>();
+        int message = FAILED;
+        String sqlQn = "select count(*), qn_type from db_16.questionnaire where s_id=? group by qn_type ";
+        result.clear();
+        try {
+            PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
+            pstmtQn.setString(1, adm_id);
+            ResultSet rsQn = pstmtQn.executeQuery();
+            while(rsQn.next()) {
+                pairs.add(new Pair(rsQn.getString(2), rsQn.getInt(1)));
+            }
+            Pair others = null;
+            for(Pair p : pairs){
+                if(p.type.equals("其他")){
+                    others = p;
+                    pairs.remove(p);
+                    break;
+                }
+            }
+            for(Pair p : pairs){
+                result.add(p.type+"*"+(p.num+others.num));
+            }
+            result.add(others.type+"*"+others.num);
+            message = SUCCESS;
+        } catch (SQLException e) {
+            message = EXCEPTION;
+            System.out.println("MySQL fault.");
+            e.printStackTrace();
+        } finally {
+            try {
+                dbconn.close();
+            } catch (Exception e) {
+                message = EXCEPTION;
+                e.printStackTrace();
+            }
+        }
+        return message;
+    }
 }
